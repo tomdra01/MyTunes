@@ -1,51 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MainWindowController">
-   <children>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Pane prefHeight="613.0" prefWidth="800.0">
-         <children>
-            <Button layoutX="67.0" layoutY="50.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="33.0" text="&gt;" />
-            <Button layoutX="121.0" layoutY="50.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="33.0" text="||" />
-            <Button layoutX="174.0" layoutY="50.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="33.0" text="|&gt;" />
-            <Slider layoutX="67.0" layoutY="104.0" onDragDetected="#soundScroll" />
-            <ImageView fitHeight="110.0" fitWidth="120.0" layoutX="340.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
-            <ListView layoutX="34.0" layoutY="159.0" prefHeight="364.0" prefWidth="206.0" />
-            <Separator layoutX="268.0" layoutY="159.0" orientation="VERTICAL" prefHeight="364.0" prefWidth="6.0" />
-            <ListView layoutX="297.0" layoutY="159.0" prefHeight="364.0" prefWidth="206.0" />
-            <Separator layoutX="536.0" layoutY="159.0" orientation="VERTICAL" prefHeight="364.0" prefWidth="6.0" />
-            <ListView layoutX="566.0" layoutY="159.0" prefHeight="364.0" prefWidth="206.0" />
-         </children>
-      </Pane>
-   </children>
+    <children>
+        <MenuBar>
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Pane prefHeight="613.0" prefWidth="800.0">
+            <children>
+                <Button fx:id="playButton" layoutX="67.0" layoutY="50.0" mnemonicParsing="false" onAction="#playMedia" prefHeight="28.0" prefWidth="33.0" text="&gt;" />
+                <Button fx:id="pauseButton" layoutX="121.0" layoutY="50.0" mnemonicParsing="false" onAction="#pauseMedia" prefHeight="28.0" prefWidth="33.0" text="||" />
+                <Button fx:id="nextButton" layoutX="174.0" layoutY="50.0" mnemonicParsing="false" onAction="#nextMedia" prefHeight="28.0" prefWidth="33.0" text="|&gt;" />
+                <Slider fx:id="volumeSlider" layoutX="68.0" layoutY="111.0" onDragDetected="#soundScroll" value="50.0" />
+                <ImageView fitHeight="110.0" fitWidth="120.0" layoutX="340.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
+                <ListView layoutX="34.0" layoutY="159.0" prefHeight="364.0" prefWidth="206.0" />
+                <Separator layoutX="268.0" layoutY="159.0" orientation="VERTICAL" prefHeight="364.0" prefWidth="6.0" />
+                <ListView layoutX="297.0" layoutY="159.0" prefHeight="364.0" prefWidth="206.0" />
+                <Separator layoutX="536.0" layoutY="159.0" orientation="VERTICAL" prefHeight="364.0" prefWidth="6.0" />
+                <ListView layoutX="566.0" layoutY="159.0" prefHeight="364.0" prefWidth="206.0" />
+                <Label fx:id="songLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="15.0" prefHeight="17.0" prefWidth="185.0" text="Label" />
+                <ProgressBar fx:id="songProgressBar" layoutX="37.0" layoutY="86.0" prefWidth="200.0" progress="0.0" />
+                <Button fx:id="previousButton" layoutX="21.0" layoutY="50.0" mnemonicParsing="false" onAction="#previousMedia" prefHeight="28.0" prefWidth="33.0" text="&lt;|" />
+            </children>
+        </Pane>
+    </children>
 </VBox>
+
