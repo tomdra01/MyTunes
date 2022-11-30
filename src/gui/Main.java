@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
 
-        Parent root = FXMLLoader.load(Main.class.getResource("view/MainWindowView.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("view/MYTunesView.fxml"));
         primaryStage.setTitle("Application");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
