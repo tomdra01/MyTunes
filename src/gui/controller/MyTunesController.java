@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainWindowController implements Initializable {
+public class MyTunesController implements Initializable {
 
     @FXML
     private Pane pane;
