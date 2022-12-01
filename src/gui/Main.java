@@ -8,14 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import java.io.IOException;
-
 
 public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
-
-        Parent root = FXMLLoader.load(Main.class.getResource("view/MYTunesView.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("view/MyTunesView.fxml"));
         primaryStage.setTitle("Application");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
