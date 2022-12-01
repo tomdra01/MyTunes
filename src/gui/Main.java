@@ -12,9 +12,10 @@ import java.io.IOException;
 
 public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("view/MyTunesView.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("view/MyTunes.fxml"));
         primaryStage.setTitle("Application");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
         primaryStage.show();
 
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {

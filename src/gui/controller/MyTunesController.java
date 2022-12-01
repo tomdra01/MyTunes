@@ -12,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -182,16 +181,59 @@ public class MyTunesController implements Initializable {
     }
 
     public void addSong(ActionEvent actionEvent) throws IOException{
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/EditWindow.fxml"));
-        Scene scene = new Scene(loader.load());
+        FXMLLoader addSongLoader = new FXMLLoader(Main.class.getResource("view/AddSongWindow.fxml"));
+        Scene addSongScene = new Scene(addSongLoader.load());
 
-        EditWindowController editWindowController = loader.getController();
-        editWindowController.setParentController2();
+        AddSongController addSongController = addSongLoader.getController();
+        addSongController.setParentController();
 
-        Stage stage = new Stage();
-        stage.setTitle("Window");
-        stage.setScene(scene);
-        stage.show();
+        Stage addSongStage = new Stage();
+        addSongStage.setTitle("Add Song");
+        addSongStage.setScene(addSongScene);
+        addSongStage.setResizable(false);
+        addSongStage.show();
+    }
+
+    public void editSong(ActionEvent actionEvent) throws IOException{
+        FXMLLoader editSongLoader = new FXMLLoader(Main.class.getResource("view/EditSongWindow.fxml"));
+        Scene editSongScene = new Scene(editSongLoader.load());
+
+        EditSongController editSongController = editSongLoader.getController();
+        editSongController.setParentController();
+
+        Stage editSongStage = new Stage();
+        editSongStage.setTitle("Edit Song");
+        editSongStage.setScene(editSongScene);
+        editSongStage.setResizable(false);
+        editSongStage.show();
+    }
+
+    public void createPlaylist(ActionEvent actionEvent) throws IOException {
+        FXMLLoader createPlaylistLoader = new FXMLLoader(Main.class.getResource("view/CreatePlaylistWindow.fxml"));
+        Scene createPlaylistScene = new Scene(createPlaylistLoader.load());
+
+        CreatePlaylistController createPlaylistController = createPlaylistLoader.getController();
+        createPlaylistController.setParentController();
+
+        Stage createPlaylistStage = new Stage();
+        createPlaylistStage.setTitle("Create Playlist");
+        createPlaylistStage.setScene(createPlaylistScene);
+        createPlaylistStage.setResizable(false);
+        createPlaylistStage.show();
+    }
+
+    public void editPlaylist(ActionEvent actionEvent) throws IOException {
+        FXMLLoader editPlaylistLoader = new FXMLLoader(Main.class.getResource("view/EditPlaylistWindow.fxml"));
+        Scene editPlaylistScene = new Scene(editPlaylistLoader.load());
+
+        EditPlaylistController editPlaylistController = editPlaylistLoader.getController();
+        editPlaylistController.setParentController();
+
+        Stage editPlaylistStage = new Stage();
+        editPlaylistStage.setTitle("Edit Playlist");
+        editPlaylistStage.setScene(editPlaylistScene);
+        editPlaylistStage.setResizable(false);
+        editPlaylistStage.show();
     }
 }
 
