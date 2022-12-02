@@ -1,6 +1,7 @@
 package dal;
 
 import be.Song;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,11 +28,10 @@ public class SongDAO_db {
             if(statement.execute(sql)) {
                 ResultSet resultSet = statement.getResultSet();
                 while(resultSet.next()) {
-                    int id = resultSet.getInt("SongID");
                     String title = resultSet.getString("Title");
                     String artist = resultSet.getString("Artist");
 
-                    Song song = new Song(id, title, artist);
+                    Song song = new Song(title, artist);
                     allSongs.add(song);
                 }
             }
@@ -39,8 +39,23 @@ public class SongDAO_db {
         return allSongs;
     }
 
+    public Song createSong(String title, String artist, String source, int genereID) throws SQLException {
+        try(Connection connection = databaseConnector.getConnection()) {
+            String insert = "'" + title + "'" + "," + "'" + artist + "'" + "," + "'" + source + "'" + "," + genereID;
+            String sql = "INSERT INTO Songs (Title, Source, Artist, GenereID) VALUES (" + insert + ")";
+
+            Statement statement = connection.createStatement();
+
+            statement.execute(sql);
+
+        }
+        return new Song(title, artist);
+    }
+
     public static void main(String[] args) throws SQLException {
         SongDAO_db songDAO_db = new SongDAO_db();
+
+        songDAO_db.createSong("Just Dance", "Lady Gaga", "songPathXXX", 1);
 
         List<Song> allSongs = songDAO_db.getAllSongs();
 

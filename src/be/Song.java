@@ -7,14 +7,9 @@ public class Song {
 
     private String artist;
 
-    public Song(int id, String title, String artist) {
-        this.id = id;
+    public Song(String title, String artist) {
         this.title = title;
         this.artist = artist;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getTitle() {
@@ -36,8 +31,7 @@ public class Song {
     @Override
     public String toString() {
         return "Song{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", artist='" + artist + '\'' +
                 '}';
     }
