@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EditSongController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.NewWindowController">
     <children>
         <BorderPane prefHeight="50.0" prefWidth="600.0">
          <center>
@@ -20,9 +20,9 @@
         <AnchorPane prefHeight="320.0" prefWidth="600.0">
             <children>
                 <Label layoutX="33.0" layoutY="66.0" prefHeight="19.0" prefWidth="89.0" text="Title" />
-                <TextField fx:id="titleField" layoutX="122.0" layoutY="62.0" />
+                <TextField layoutX="122.0" layoutY="62.0" />
                 <Label layoutX="33.0" layoutY="106.0" prefHeight="19.0" prefWidth="89.0" text="Artist:" />
-                <TextField fx:id="artistField" layoutX="122.0" layoutY="102.0" />
+                <TextField layoutX="122.0" layoutY="102.0" />
                 <Label layoutX="33.0" layoutY="144.0" prefHeight="19.0" prefWidth="89.0" text="Category:" />
                 <SplitMenuButton layoutX="122.0" layoutY="141.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" text="Choose">
                     <items>
@@ -35,10 +35,10 @@
         <Separator prefHeight="3.0" prefWidth="400.0" />
         <BorderPane prefHeight="50.0" prefWidth="600.0">
             <right>
-                <Button mnemonicParsing="false" onAction="#saveChanges" text="Save" BorderPane.alignment="CENTER" />
+                <Button mnemonicParsing="false" text="Save" BorderPane.alignment="CENTER" />
             </right>
             <left>
-                <Button mnemonicParsing="false" onAction="#cancelChanges" text="Cancel" BorderPane.alignment="CENTER" />
+                <Button mnemonicParsing="false" text="Cancel" BorderPane.alignment="CENTER" />
             </left>
         </BorderPane>
     </children>

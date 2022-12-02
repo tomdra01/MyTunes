@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MyTunesController implements Initializable {
-    public ListView<String> playlistsList;
+
+    @FXML
+    private ListView<String> playlistsList;
     @FXML
     private ListView<String> songsList;
     @FXML
@@ -184,8 +187,8 @@ public class MyTunesController implements Initializable {
         FXMLLoader addSongLoader = new FXMLLoader(Main.class.getResource("view/AddSongWindow.fxml"));
         Scene addSongScene = new Scene(addSongLoader.load());
 
-        AddSongController addSongController = addSongLoader.getController();
-        addSongController.setParentController();
+        NewWindowController newWindowController = addSongLoader.getController();
+        newWindowController.setParentController();
 
         Stage addSongStage = new Stage();
         addSongStage.setTitle("Add Song");
@@ -198,8 +201,8 @@ public class MyTunesController implements Initializable {
         FXMLLoader editSongLoader = new FXMLLoader(Main.class.getResource("view/EditSongWindow.fxml"));
         Scene editSongScene = new Scene(editSongLoader.load());
 
-        EditSongController editSongController = editSongLoader.getController();
-        editSongController.setParentController();
+        NewWindowController newWindowController = editSongLoader.getController();
+        newWindowController.setParentController();
 
         Stage editSongStage = new Stage();
         editSongStage.setTitle("Edit Song");
@@ -212,8 +215,8 @@ public class MyTunesController implements Initializable {
         FXMLLoader createPlaylistLoader = new FXMLLoader(Main.class.getResource("view/CreatePlaylistWindow.fxml"));
         Scene createPlaylistScene = new Scene(createPlaylistLoader.load());
 
-        CreatePlaylistController createPlaylistController = createPlaylistLoader.getController();
-        createPlaylistController.setParentController();
+        NewWindowController newWindowController = createPlaylistLoader.getController();
+        newWindowController.setParentController();
 
         Stage createPlaylistStage = new Stage();
         createPlaylistStage.setTitle("Create Playlist");
@@ -226,14 +229,32 @@ public class MyTunesController implements Initializable {
         FXMLLoader editPlaylistLoader = new FXMLLoader(Main.class.getResource("view/EditPlaylistWindow.fxml"));
         Scene editPlaylistScene = new Scene(editPlaylistLoader.load());
 
-        EditPlaylistController editPlaylistController = editPlaylistLoader.getController();
-        editPlaylistController.setParentController();
+        NewWindowController newWindowController = editPlaylistLoader.getController();
+        newWindowController.setParentController();
 
         Stage editPlaylistStage = new Stage();
         editPlaylistStage.setTitle("Edit Playlist");
         editPlaylistStage.setScene(editPlaylistScene);
         editPlaylistStage.setResizable(false);
         editPlaylistStage.show();
+    }
+
+    public void openButton(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Your Directory");
+        File file = fileChooser.showOpenDialog(null);
+        path = file.toURI().toString();
+
+        if (path != null){
+            songNumber = 0;
+            mediaPlayer.stop(); //Stops the current playing song before opening new song
+
+            Media media = new Media(path);
+            mediaPlayer = new MediaPlayer(media);
+
+            songLabel.setText(file.getName()); //Changing the label for the current song
+            playMedia();
+        }
     }
 }
 
