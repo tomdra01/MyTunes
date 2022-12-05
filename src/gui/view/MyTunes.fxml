@@ -54,20 +54,20 @@
         </MenuBar>
         <Pane prefHeight="613.0" prefWidth="870.0">
             <children>
-                <Button fx:id="previousButton" layoutX="78.0" layoutY="59.0" mnemonicParsing="false" onAction="#previousMedia" prefHeight="28.0" prefWidth="33.0" text="&lt;&lt;" />
-                <Button fx:id="playButton" layoutX="128.0" layoutY="59.0" mnemonicParsing="false" onAction="#playMedia" prefHeight="28.0" prefWidth="33.0" text="▶" />
-                <Button fx:id="pauseButton" layoutX="177.0" layoutY="59.0" mnemonicParsing="false" onAction="#pauseMedia" prefHeight="28.0" prefWidth="33.0" text="||">
+                <Button fx:id="previousButton" layoutX="43.0" layoutY="59.0" mnemonicParsing="false" onAction="#previousMedia" prefHeight="28.0" prefWidth="33.0" text="&lt;&lt;" />
+                <Button fx:id="playButton" layoutX="93.0" layoutY="59.0" mnemonicParsing="false" onAction="#playMedia" prefHeight="28.0" prefWidth="33.0" text="▶" />
+                <Button fx:id="pauseButton" layoutX="142.0" layoutY="59.0" mnemonicParsing="false" onAction="#pauseMedia" prefHeight="28.0" prefWidth="33.0" text="||">
                <font>
                   <Font name="Arial Hebrew" size="14.0" />
                </font></Button>
-                <Button fx:id="nextButton" layoutX="225.0" layoutY="59.0" mnemonicParsing="false" onAction="#nextMedia" prefHeight="28.0" prefWidth="33.0" text="&gt;&gt;" />
-                <Slider fx:id="volumeSlider" layoutX="99.0" layoutY="100.0" majorTickUnit="20.0" value="50.0" />
-                <ProgressBar fx:id="songProgressBar" focusTraversable="false" layoutX="74.0" layoutY="28.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="190.0" progress="0.0">
+                <Button fx:id="nextButton" layoutX="190.0" layoutY="59.0" mnemonicParsing="false" onAction="#nextMedia" prefHeight="28.0" prefWidth="33.0" text="&gt;&gt;" />
+                <Slider fx:id="volumeSlider" layoutX="64.0" layoutY="100.0" majorTickUnit="20.0" value="50.0" />
+                <ProgressBar fx:id="songProgressBar" focusTraversable="false" layoutX="39.0" layoutY="28.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="190.0" progress="0.0">
                <effect>
                   <ColorAdjust hue="-0.3" saturation="-0.4" />
                </effect></ProgressBar>
-            <Label layoutX="571.0" layoutY="37.0" prefHeight="17.0" prefWidth="180.0" text="Now playing..." />
-                <Label fx:id="songLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="390.0" layoutY="72.0" prefHeight="17.0" prefWidth="465.0" />
+            <Label layoutX="532.0" layoutY="33.0" prefHeight="17.0" prefWidth="180.0" text="Now playing..." />
+                <Label fx:id="songLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="351.0" layoutY="68.0" prefHeight="17.0" prefWidth="465.0" />
             <Label layoutX="41.0" layoutY="142.0" prefHeight="17.0" prefWidth="75.0" text="PLAYLISTS">
                <font>
                   <Font size="11.0" />

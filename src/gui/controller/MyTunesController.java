@@ -4,6 +4,7 @@ import be.Song;
 import gui.Main;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -260,7 +261,6 @@ public class MyTunesController implements Initializable {
         path = file.toURI().toString();
 
         if (path != null){
-            songNumber = 0;
             mediaPlayer.stop(); //Stops the current playing song before opening new song
 
             Media media = new Media(path);
