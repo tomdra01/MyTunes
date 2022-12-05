@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -23,6 +25,12 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class NewWindowController implements Initializable {
+    @FXML
+    private MenuItem trapButton;
+    @FXML
+    private MenuItem popButton;
+    @FXML
+    private SplitMenuButton chooseCategory;
     @FXML
     private Button saveButton;
     @FXML
@@ -59,7 +67,7 @@ public class NewWindowController implements Initializable {
             Media media = new Media(path);
             mediaPlayer = new MediaPlayer(media);
             fileField.setText(file.getPath());
-            //timeField.setText(media.getDuration().toString());
+            timeField.setText(media.getDuration().toString());
             //System.out.println(mediaPlayer.getCurrentTime());
         }
     }
@@ -76,5 +84,13 @@ public class NewWindowController implements Initializable {
 
         Stage stage = (Stage) saveButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void popCategory(ActionEvent actionEvent) {
+        chooseCategory.setText(popButton.getText());
+    }
+
+    public void trapCategory(ActionEvent actionEvent) {
+        chooseCategory.setText(trapButton.getText());
     }
 }
