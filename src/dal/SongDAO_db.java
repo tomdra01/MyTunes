@@ -29,9 +29,10 @@ public class SongDAO_db {
                 ResultSet resultSet = statement.getResultSet();
                 while(resultSet.next()) {
                     String title = resultSet.getString("Title");
+                    String source = resultSet.getString("Source");
                     String artist = resultSet.getString("Artist");
 
-                    Song song = new Song(title, artist);
+                    Song song = new Song(title, source, artist);
                     allSongs.add(song);
                 }
             }
@@ -47,15 +48,14 @@ public class SongDAO_db {
             Statement statement = connection.createStatement();
 
             statement.execute(sql);
-
         }
-        return new Song(title, artist);
+        return new Song(title, source, artist);
     }
 
     public static void main(String[] args) throws SQLException {
         SongDAO_db songDAO_db = new SongDAO_db();
 
-        songDAO_db.createSong("Just Dance", "Lady Gaga", "songPathXXX", 1);
+        //songDAO_db.createSong("Just Dance", "songPathXXX", "Lady Gaga", 1);
 
         List<Song> allSongs = songDAO_db.getAllSongs();
 

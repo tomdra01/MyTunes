@@ -1,5 +1,7 @@
 package gui.controller;
 
+import gui.model.MyTunesModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -15,6 +17,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class NewWindowController implements Initializable {
@@ -30,6 +33,8 @@ public class NewWindowController implements Initializable {
     private Media media;
     private File file;
     private MediaPlayer mediaPlayer;
+
+    MyTunesModel model = new MyTunesModel();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,5 +56,11 @@ public class NewWindowController implements Initializable {
             //timeField.setText(media.getDuration().toString());
             //System.out.println(mediaPlayer.getCurrentTime());
         }
+    }
+
+    public void createSongClick(ActionEvent actionEvent) throws SQLException {
+        model.createSong(titleField.getText(), path, artistField.getText(), 1 );
+        titleField.clear();
+        artistField.clear();
     }
 }

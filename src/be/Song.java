@@ -7,8 +7,11 @@ public class Song {
 
     private String artist;
 
-    public Song(String title, String artist) {
+    private String source;
+
+    public Song(String title, String source, String artist) {
         this.title = title;
+        this.source = source;
         this.artist = artist;
     }
 
@@ -32,6 +35,7 @@ public class Song {
     public String toString() {
         return "Song{" +
                 "title='" + title + '\'' +
+                ", source='" + source + '\'' +
                 ", artist='" + artist + '\'' +
                 '}';
     }

@@ -40,7 +40,7 @@
       <Separator prefHeight="3.0" prefWidth="400.0" />
       <BorderPane prefHeight="50.0" prefWidth="600.0">
          <right>
-            <Button mnemonicParsing="false" text="Save" BorderPane.alignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#createSongClick" text="Save" BorderPane.alignment="CENTER" />
          </right>
          <left>
             <Button mnemonicParsing="false" text="Cancel" BorderPane.alignment="CENTER" />
