@@ -1,5 +1,6 @@
 package gui.controller;
 
+import be.Song;
 import gui.Main;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,11 +23,24 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MyTunesController implements Initializable {
-
     @FXML
-    private ListView<String> playlistsList;
+    private TableView<String> playlistTable;
     @FXML
-    private ListView<String> songsList;
+    private TableColumn<Song,String> nameColumn;
+    @FXML
+    private TableView<String> queueTable;
+    @FXML
+    private TableColumn<Song,String> queueColumn;
+    @FXML
+    private TableView<String> songsTable;
+    @FXML
+    private TableColumn<Song,String> titleColumn;
+    @FXML
+    private TableColumn<Song,String> artistColumn;
+    @FXML
+    private TableColumn<Song,String> genreColumn;
+    @FXML
+    private TableColumn<Song,Double> timeColumn;
     @FXML
     private Label songLabel;
     @FXML
@@ -53,7 +67,7 @@ public class MyTunesController implements Initializable {
         if(files != null){
             for(File file:files){
                 songs.add(file);
-                songsList.getItems().addAll(file.getName());
+                //songsList.getItems().addAll(file.getName());
             }
         }
         media = new Media(songs.get(songNumber).toURI().toString());

@@ -1,8 +1,6 @@
 package dal;
 
 import be.Song;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
