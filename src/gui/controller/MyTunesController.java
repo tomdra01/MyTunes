@@ -2,15 +2,16 @@ package gui.controller;
 
 import be.Song;
 import gui.Main;
+import gui.model.MyTunesModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -29,11 +30,11 @@ public class MyTunesController implements Initializable {
     @FXML
     private TableColumn<Song,String> nameColumn;
     @FXML
-    private TableView<String> queueTable;
+    private TableView queueTable;
     @FXML
     private TableColumn<Song,String> queueColumn;
     @FXML
-    private TableView<String> songsTable;
+    private TableView<Song> songsTable;
     @FXML
     private TableColumn<Song,String> titleColumn;
     @FXML
@@ -58,9 +59,18 @@ public class MyTunesController implements Initializable {
     private Timer timer;
     private TimerTask task;
     private boolean running;
+    private MyTunesModel model;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        model = new MyTunesModel();
+        model.fetchAllSongs();
+        songsTable.setItems(model.getSongs());
+        titleColumn.setCellValueFactory((new PropertyValueFactory<>("title")));
+        artistColumn.setCellValueFactory((new PropertyValueFactory<>("artist")));
+        genreColumn.setCellValueFactory((new PropertyValueFactory<>("genreID")));
+        timeColumn.setCellValueFactory((new PropertyValueFactory<>("time")));
+
         songs = new ArrayList<File>();
         directory = new File("Project Resources/Music");
         files = directory.listFiles();
@@ -68,7 +78,6 @@ public class MyTunesController implements Initializable {
         if(files != null){
             for(File file:files){
                 songs.add(file);
-                //songsList.getItems().addAll(file.getName());
             }
         }
         media = new Media(songs.get(songNumber).toURI().toString());
@@ -204,6 +213,7 @@ public class MyTunesController implements Initializable {
 
         NewWindowController newWindowController = addSongLoader.getController();
         newWindowController.setParentController();
+        newWindowController.setModel(model);
 
         Stage addSongStage = new Stage();
         addSongStage.setTitle("Add Song");

@@ -48,7 +48,11 @@ public class NewWindowController implements Initializable {
     private File file;
     private MediaPlayer mediaPlayer;
 
-    MyTunesModel model = new MyTunesModel();
+    MyTunesModel model;
+
+    public void setModel(MyTunesModel model){
+        this.model = model;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -66,9 +70,16 @@ public class NewWindowController implements Initializable {
         if (path != null){
             Media media = new Media(path);
             mediaPlayer = new MediaPlayer(media);
+
+            //Shows the time of the file
+            mediaPlayer.setOnReady(() ->{
+                int minutes = (int) mediaPlayer.getTotalDuration().toMinutes();
+                int seconds = (int) mediaPlayer.getTotalDuration().toSeconds();
+                timeField.setText(minutes + ":" + seconds);
+                System.out.println(minutes + ":" + seconds);
+            });
+            //Shows the path to the file
             fileField.setText(file.getPath());
-            timeField.setText(media.getDuration().toString());
-            //System.out.println(mediaPlayer.getCurrentTime());
         }
     }
 

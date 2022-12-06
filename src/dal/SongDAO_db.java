@@ -1,6 +1,8 @@
 package dal;
 
 import be.Song;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +18,7 @@ public class SongDAO_db {
         databaseConnector = new DatabaseConnector();
     }
 
-    public List<Song> getAllSongs() throws SQLException {
+    public List<Song> getAllSongs(){
         ArrayList<Song> allSongs = new ArrayList<>();
         try(Connection connection = databaseConnector.getConnection()){
             String sql = "SELECT * FROM Songs;";
@@ -34,6 +36,10 @@ public class SongDAO_db {
                     allSongs.add(song);
                 }
             }
+        } catch (SQLServerException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return allSongs;
     }

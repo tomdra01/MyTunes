@@ -9,10 +9,10 @@ public class Song {
 
     private String source;
 
-    public Song(String title, String source, String artist) {
+    public Song(String title, String artist, String source) {
         this.title = title;
-        this.source = source;
         this.artist = artist;
+        this.source = source;
     }
 
     public String getTitle() {
@@ -35,8 +35,8 @@ public class Song {
     public String toString() {
         return "Song{" +
                 "title='" + title + '\'' +
-                ", source='" + source + '\'' +
                 ", artist='" + artist + '\'' +
+                ", source='" + source + '\'' +
                 '}';
     }
 }
