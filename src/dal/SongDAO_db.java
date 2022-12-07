@@ -28,9 +28,10 @@ public class SongDAO_db {
                     String title = resultSet.getString("Title");
                     String artist = resultSet.getString("Artist");
                     String source = resultSet.getString("Source");
+                    Integer genreID = resultSet.getInt("genereID");
                     String time = resultSet.getString("Time");
 
-                    Song song = new Song(title, artist, source, time);
+                    Song song = new Song(title, artist, source, genreID, time);
                     allSongs.add(song);
                 }
             }
@@ -51,7 +52,7 @@ public class SongDAO_db {
 
             statement.execute(sql);
         }
-        return new Song(title, artist, source, time);
+        return new Song(title, source, artist, genreID, time);
     }
 
     public void delete(int id) {

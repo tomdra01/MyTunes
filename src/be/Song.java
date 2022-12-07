@@ -9,12 +9,15 @@ public class Song {
 
     private String source;
 
+    private int genreID;
+
     private String time;
 
-    public Song(String title, String artist, String source, String time) {
+    public Song(String title, String artist, String source, int genreID, String time) {
         this.title = title;
         this.artist = artist;
         this.source = source;
+        this.genreID = genreID;
         this.time = time;
     }
 

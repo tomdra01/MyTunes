@@ -73,8 +73,8 @@ public class NewWindowController implements Initializable {
 
             //Shows the time of the file
             mediaPlayer.setOnReady(() ->{
-                int minutes = (int) mediaPlayer.getTotalDuration().toMinutes();
-                int seconds = (int) mediaPlayer.getTotalDuration().toSeconds();
+                int minutes = (int) mediaPlayer.getTotalDuration().toMinutes(); // Getting the minutes of the song
+                int seconds = (int) mediaPlayer.getTotalDuration().toSeconds() % 60; // Getting seconds of the song
                 timeField.setText(minutes + ":" + seconds);
                 System.out.println(minutes + ":" + seconds);
             });
@@ -89,7 +89,7 @@ public class NewWindowController implements Initializable {
     }
 
     public void handleSaveButtonAction(ActionEvent actionEvent) throws SQLException {
-        model.createSong(titleField.getText(), artistField.getText(), path, 1 , timeField.getText());
+        model.createSong(titleField.getText(), path, artistField.getText(), 1 , timeField.getText());
         titleField.clear();
         artistField.clear();
 
