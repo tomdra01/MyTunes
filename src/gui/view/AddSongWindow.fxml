@@ -40,10 +40,10 @@
       <Separator prefHeight="3.0" prefWidth="400.0" />
       <BorderPane prefHeight="50.0" prefWidth="600.0">
          <right>
-            <Button fx:id="saveButton" cancelButton="true" mnemonicParsing="false" onAction="#handleSaveButtonAction" text="Save" BorderPane.alignment="CENTER" />
+            <Button fx:id="addButton" cancelButton="true" mnemonicParsing="false" onAction="#addSongAction" text="Add" BorderPane.alignment="CENTER" />
          </right>
          <left>
-            <Button fx:id="closeButton" cancelButton="true" mnemonicParsing="false" onAction="#handleCloseButtonAction" text="Cancel" BorderPane.alignment="CENTER" />
+            <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelActionButton" text="Cancel" BorderPane.alignment="CENTER" />
          </left>
       </BorderPane>
    </children>

@@ -266,13 +266,11 @@ public class MyTunesController implements Initializable {
 
     public void openButton(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Your Directory");
         File file = fileChooser.showOpenDialog(null);
         path = file.toURI().toString();
 
         if (path != null){
             mediaPlayer.stop(); //Stops the current playing song before opening new song
-
             Media media = new Media(path);
             mediaPlayer = new MediaPlayer(media);
 

@@ -27,7 +27,7 @@
                 <Button mnemonicParsing="false" text="Save" BorderPane.alignment="CENTER" />
             </right>
             <left>
-                <Button mnemonicParsing="false" text="Cancel" BorderPane.alignment="CENTER" />
+                <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelActionButton" text="Cancel" BorderPane.alignment="CENTER" />
             </left>
         </BorderPane>
     </children>

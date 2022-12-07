@@ -26,13 +26,17 @@ import java.util.ResourceBundle;
 
 public class NewWindowController implements Initializable {
     @FXML
+    private Button createButton;
+    @FXML
+    private Button cancelButton;
+    @FXML
+    private Button addButton;
+    @FXML
     private MenuItem trapButton;
     @FXML
     private MenuItem popButton;
     @FXML
     private SplitMenuButton chooseCategory;
-    @FXML
-    private Button saveButton;
     @FXML
     private Button closeButton;
     @FXML
@@ -83,17 +87,29 @@ public class NewWindowController implements Initializable {
         }
     }
 
-    public void handleCloseButtonAction(ActionEvent actionEvent) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
+    /**
+     * This method close the window everytime you press the "Cancel" button
+     */
+    public void cancelActionButton(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
-    public void handleSaveButtonAction(ActionEvent actionEvent) throws SQLException {
+    /**
+     * This method adds song directly to the database and when you press "Add" button it will close the window
+     */
+    public void addSongAction(ActionEvent actionEvent) throws SQLException {
         model.createSong(titleField.getText(), path, artistField.getText(), 1 , timeField.getText());
-        titleField.clear();
-        artistField.clear();
 
-        Stage stage = (Stage) saveButton.getScene().getWindow();
+        Stage stage = (Stage) addButton.getScene().getWindow();
+        stage.close();
+    }
+
+    /**
+     * This method creates new playlist
+     */
+    public void createPlaylistAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) createButton.getScene().getWindow();
         stage.close();
     }
 
