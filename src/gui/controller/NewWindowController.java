@@ -89,7 +89,7 @@ public class NewWindowController implements Initializable {
     }
 
     public void handleSaveButtonAction(ActionEvent actionEvent) throws SQLException {
-        model.createSong(titleField.getText(), path, artistField.getText(), 1 , timeField.getText());
+        model.createSong(titleField.getText(), artistField.getText(), path, 1 , timeField.getText());
         titleField.clear();
         artistField.clear();
 
