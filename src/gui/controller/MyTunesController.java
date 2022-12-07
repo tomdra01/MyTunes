@@ -42,7 +42,7 @@ public class MyTunesController implements Initializable {
     @FXML
     private TableColumn<Song,String> genreColumn;
     @FXML
-    private TableColumn<Song,Double> timeColumn;
+    private TableColumn<Song,String> timeColumn;
     @FXML
     private Label songLabel;
     @FXML

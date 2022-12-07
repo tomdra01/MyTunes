@@ -3,10 +3,7 @@ package dal;
 import be.Song;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +26,11 @@ public class SongDAO_db {
                 ResultSet resultSet = statement.getResultSet();
                 while(resultSet.next()) {
                     String title = resultSet.getString("Title");
-                    String source = resultSet.getString("Source");
                     String artist = resultSet.getString("Artist");
+                    String source = resultSet.getString("Source");
+                    String time = resultSet.getString("Time");
 
-                    Song song = new Song(title, source, artist);
+                    Song song = new Song(title, artist, source, time);
                     allSongs.add(song);
                 }
             }
@@ -44,22 +42,38 @@ public class SongDAO_db {
         return allSongs;
     }
 
-    public Song createSong(String title, String artist, String source, int genereID) throws SQLException {
+    public Song createSong(String title, String artist, String source, int genreID, String time) throws SQLException {
         try(Connection connection = databaseConnector.getConnection()) {
-            String insert = "'" + title + "'" + "," + "'" + artist + "'" + "," + "'" + source + "'" + "," + genereID;
-            String sql = "INSERT INTO Songs (Title, Source, Artist, GenereID) VALUES (" + insert + ")";
+            String insert = "'" + title + "'" + "," + "'" + artist + "'" + "," + "'" + source + "'" + "," + genreID + "," + "'" + time + "'";
+            String sql = "INSERT INTO Songs (Title, Source, Artist, GenereID, Time) VALUES (" + insert + ")";
 
             Statement statement = connection.createStatement();
 
             statement.execute(sql);
         }
-        return new Song(title, source, artist);
+        return new Song(title, artist, source, time);
+    }
+
+    public void delete(int id) {
+        String sql = "DELETE FROM Songs WHERE SongID= ?";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setInt(1, id);
+            // execute the delete statement
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void main(String[] args) throws SQLException {
         SongDAO_db songDAO_db = new SongDAO_db();
 
-        //songDAO_db.createSong("Just Dance", "songPathXXX", "Lady Gaga", 1);
+        //songDAO_db.createSong("Just Dance", "Lady Gaga", "songPathXXX", 1, "1");
 
         List<Song> allSongs = songDAO_db.getAllSongs();
 

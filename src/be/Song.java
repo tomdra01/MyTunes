@@ -9,10 +9,13 @@ public class Song {
 
     private String source;
 
-    public Song(String title, String artist, String source) {
+    private String time;
+
+    public Song(String title, String artist, String source, String time) {
         this.title = title;
         this.artist = artist;
         this.source = source;
+        this.time = time;
     }
 
     public String getTitle() {
@@ -31,12 +34,21 @@ public class Song {
         this.artist = artist;
     }
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return "Song{" +
                 "title='" + title + '\'' +
                 ", artist='" + artist + '\'' +
                 ", source='" + source + '\'' +
+                ", time='" + time + '\'' +
                 '}';
     }
 }

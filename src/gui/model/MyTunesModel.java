@@ -13,8 +13,8 @@ public class MyTunesModel {
     public ObservableList<Song> getSongs(){
         return songs;
     }
-    public Song createSong(String title, String source, String artist, int genreID) throws SQLException {
-        Song song = bll.createSong(title, artist, source, genreID);
+    public Song createSong(String title, String artist, String source, int genreID, String time) throws SQLException {
+        Song song = bll.createSong(title, artist, source, genreID, time);
         songs.add(song);
         return song;
     }
