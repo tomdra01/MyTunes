@@ -26,64 +26,57 @@ import java.util.ResourceBundle;
 
 public class NewWindowController implements Initializable {
     @FXML
-    private Button createButton;
-    @FXML
-    private Button cancelButton;
-    @FXML
-    private Button addButton;
-    @FXML
-    private MenuItem trapButton;
-    @FXML
-    private MenuItem popButton;
-    @FXML
-    private SplitMenuButton chooseCategory;
-    @FXML
-    private Button closeButton;
-    @FXML
     private TextField titleField;
     @FXML
     private TextField artistField;
     @FXML
-    private TextField fileField;
+    private SplitMenuButton chooseCategory;
     @FXML
     private TextField timeField;
-    private String path;
-    private Media media;
-    private File file;
+    @FXML
+    private TextField fileField;
+
+    @FXML
+    private Button addButton;
+    @FXML
+    private Button createButton;
+    @FXML
+    private Button cancelButton;
+    @FXML
+    private MenuItem trapButton;
+    @FXML
+    private MenuItem popButton;
+
+    private MyTunesModel model;
     private MediaPlayer mediaPlayer;
-
-    MyTunesModel model;
-
-    public void setModel(MyTunesModel model){
-        this.model = model;
-    }
+    private File file;
+    private String path;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void setParentController() {
+    public void setModel(MyTunesModel model){
+        this.model = model;
     }
 
+    /**
+     * Choosing a file we want to add to our MyTunes
+     */
     public void chooseFile() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Your Directory");
         file = fileChooser.showOpenDialog(null);
         path = file.toURI().toString();
 
         if (path != null){
             Media media = new Media(path);
             mediaPlayer = new MediaPlayer(media);
-
-            //Shows the time of the file
             mediaPlayer.setOnReady(() ->{
-                int minutes = (int) mediaPlayer.getTotalDuration().toMinutes(); // Getting the minutes of the song
-                int seconds = (int) mediaPlayer.getTotalDuration().toSeconds() % 60; // Getting seconds of the song
-                timeField.setText(minutes + ":" + seconds);
-                System.out.println(minutes + ":" + seconds);
+                int minutes = (int) mediaPlayer.getTotalDuration().toMinutes(); //Getting the minutes of the song
+                int seconds = (int) mediaPlayer.getTotalDuration().toSeconds() % 60; //Getting seconds of the song
+                timeField.setText(minutes + ":" + seconds); //Shows the total time of the song
             });
-            //Shows the path to the file
-            fileField.setText(file.getPath());
+            fileField.setText(file.getPath()); //Shows the path to the file
         }
     }
 

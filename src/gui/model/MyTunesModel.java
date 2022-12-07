@@ -7,8 +7,8 @@ import javafx.collections.ObservableList;
 import java.sql.SQLException;
 
 public class MyTunesModel {
-    private ObservableList<Song> songs = FXCollections.observableArrayList();
     LogicManager bll = new LogicManager();
+    private ObservableList<Song> songs = FXCollections.observableArrayList();
 
     public ObservableList<Song> getSongs(){
         return songs;
@@ -18,6 +18,7 @@ public class MyTunesModel {
         songs.add(song);
         return song;
     }
+
 
     public void fetchAllSongs() {
         songs.addAll(bll.getAllSongs());

@@ -2,13 +2,11 @@ package dal;
 
 import be.Song;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SongDAO_db {
-
     private DatabaseConnector databaseConnector;
 
     public SongDAO_db() {
@@ -73,9 +71,6 @@ public class SongDAO_db {
 
     public static void main(String[] args) throws SQLException {
         SongDAO_db songDAO_db = new SongDAO_db();
-
-        //songDAO_db.createSong("Just Dance", "Lady Gaga", "songPathXXX", 1, "1");
-
         List<Song> allSongs = songDAO_db.getAllSongs();
 
         System.out.println(allSongs);
