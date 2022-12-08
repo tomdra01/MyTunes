@@ -42,7 +42,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#createPlaylist" text="Create Playlist" />
                   <MenuItem mnemonicParsing="false" onAction="#editPlaylist" text="Edit Playlist" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Delete Playlist" />
                </items>
             </Menu>
                 <Menu mnemonicParsing="false" text="About">

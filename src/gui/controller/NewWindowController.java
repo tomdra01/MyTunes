@@ -26,6 +26,8 @@ import java.util.ResourceBundle;
 
 public class NewWindowController implements Initializable {
     @FXML
+    private TextField playlistNameField;
+    @FXML
     private Button createButton;
     @FXML
     private Button cancelButton;
@@ -108,7 +110,8 @@ public class NewWindowController implements Initializable {
     /**
      * This method creates new playlist
      */
-    public void createPlaylistAction(ActionEvent actionEvent) {
+    public void createPlaylistAction(ActionEvent actionEvent) throws SQLException{
+        model.createPlaylist(playlistNameField.getText());
         Stage stage = (Stage) createButton.getScene().getWindow();
         stage.close();
     }

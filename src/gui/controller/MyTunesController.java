@@ -1,6 +1,8 @@
 package gui.controller;
 
+import be.Playlist;
 import be.Song;
+import dal.DatabaseConnector;
 import gui.Main;
 import gui.model.MyTunesModel;
 import javafx.beans.value.ChangeListener;
@@ -12,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -19,6 +22,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -26,9 +32,9 @@ import java.util.TimerTask;
 
 public class MyTunesController implements Initializable {
     @FXML
-    private TableView<String> playlistTable;
+    private TableView<Playlist> playlistTable;
     @FXML
-    private TableColumn<Song,String> nameColumn;
+    private TableColumn<Playlist,String> nameColumn;
     @FXML
     private TableView queueTable;
     @FXML
@@ -64,6 +70,10 @@ public class MyTunesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = new MyTunesModel();
+        model.fetchAllPlaylist();
+        playlistTable.setItems(model.getPlaylist());
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
         model.fetchAllSongs();
         songsTable.setItems(model.getSongs());
         titleColumn.setCellValueFactory((new PropertyValueFactory<>("title")));
@@ -242,6 +252,7 @@ public class MyTunesController implements Initializable {
 
         NewWindowController newWindowController = createPlaylistLoader.getController();
         newWindowController.setParentController();
+        newWindowController.setModel(model);
 
         Stage createPlaylistStage = new Stage();
         createPlaylistStage.setTitle("Create Playlist");
@@ -278,5 +289,9 @@ public class MyTunesController implements Initializable {
             playMedia();
         }
     }
+
 }
+
+
+
 
