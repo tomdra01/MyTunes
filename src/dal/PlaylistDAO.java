@@ -22,7 +22,6 @@ public class PlaylistDAO {
         return new Playlist(name);
     }
 
-
     public List<Playlist> getAllPlaylist() {
         ArrayList<Playlist> allPlaylist = new ArrayList<>();
         try (Connection connection = databaseConnector.getConnection()) {
@@ -45,13 +44,3 @@ public class PlaylistDAO {
         return allPlaylist;
     }
 }
-
-
-
-
-
-
-
-
-
-

@@ -3,7 +3,6 @@ package be;
 import javafx.fxml.FXML;
 
 public class Playlist  {
-
     private int id;
     private String name;
     public Playlist(String name) {
@@ -24,7 +23,5 @@ public class Playlist  {
                 " name ='" + name + '\'' + '}';
 
     }
-
-
 }
 

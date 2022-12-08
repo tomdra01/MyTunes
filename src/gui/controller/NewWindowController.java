@@ -84,14 +84,6 @@ public class NewWindowController implements Initializable {
     }
 
     /**
-     * This method close the window everytime you press the "Cancel" button
-     */
-    public void cancelActionButton(ActionEvent actionEvent) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-    }
-
-    /**
      * This method adds song directly to the database and when you press "Add" button it will close the window
      */
     public void addSongAction(ActionEvent actionEvent) throws SQLException {
@@ -107,6 +99,14 @@ public class NewWindowController implements Initializable {
     public void createPlaylistAction(ActionEvent actionEvent) throws SQLException{
         model.createPlaylist(playlistNameField.getText());
         Stage stage = (Stage) createButton.getScene().getWindow();
+        stage.close();
+    }
+
+    /**
+     * This method close the window everytime you press the "Cancel" button
+     */
+    public void cancelActionButton(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 

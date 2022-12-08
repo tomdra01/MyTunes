@@ -32,8 +32,6 @@ import java.util.TimerTask;
 
 public class MyTunesController implements Initializable {
     @FXML
-    private TableView<Playlist> playlistTable;
-    @FXML
     private TableColumn<Playlist,String> nameColumn;
     @FXML
     private Label songLabel;
@@ -41,6 +39,9 @@ public class MyTunesController implements Initializable {
     private ProgressBar songProgressBar;
     @FXML
     private Slider volumeSlider;
+
+    @FXML
+    private TableView<Playlist> playlistTable;
     @FXML
     private TableView<Song> songsTable;
     @FXML
@@ -92,10 +93,9 @@ public class MyTunesController implements Initializable {
         }
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
+        changeVolume();
 
         songLabel.setText(songs.get(songNumber).getName());
-
-        changeVolume();
     }
 
     /**
@@ -124,8 +124,7 @@ public class MyTunesController implements Initializable {
         volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
-            }
+                mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);}
         });
     }
 
@@ -159,12 +158,10 @@ public class MyTunesController implements Initializable {
             if(running){
                 cancelTimer();
             }
-
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
 
             songLabel.setText(songs.get(songNumber).getName());
-
             playMedia();
         } else {
             songNumber = songs.size() - 1;
@@ -196,7 +193,6 @@ public class MyTunesController implements Initializable {
             mediaPlayer = new MediaPlayer(media);
 
             songLabel.setText(songs.get(songNumber).getName());
-
             playMedia();
         } else{
             songNumber = 0;
@@ -209,7 +205,6 @@ public class MyTunesController implements Initializable {
             mediaPlayer = new MediaPlayer(media);
 
             songLabel.setText(songs.get(songNumber).getName());
-
             playMedia();
         }
     }
@@ -223,7 +218,6 @@ public class MyTunesController implements Initializable {
                 double end = media.getDuration().toSeconds();
 
                 songProgressBar.setProgress(current/end);
-
                 if(current/end == 1){
                     cancelTimer();
                 }
@@ -283,13 +277,8 @@ public class MyTunesController implements Initializable {
         FXMLLoader createPlaylistLoader = new FXMLLoader(Main.class.getResource("view/CreatePlaylistWindow.fxml"));
         Scene createPlaylistScene = new Scene(createPlaylistLoader.load());
 
-
         NewWindowController newWindowController = createPlaylistLoader.getController();
-        //newWindowController.setParentController();
         newWindowController.setModel(model);
-
-        newWindowController = createPlaylistLoader.getController();
-
 
         Stage createPlaylistStage = new Stage();
         createPlaylistStage.setTitle("Create Playlist");
@@ -314,24 +303,8 @@ public class MyTunesController implements Initializable {
         editPlaylistStage.setResizable(false);
         editPlaylistStage.show();
     }
-    public void openButton(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(null);
-        path = file.toURI().toString();
-
-        if (path != null){
-            mediaPlayer.stop(); //Stops the current playing song before opening new song
-            Media media = new Media(path);
-            mediaPlayer = new MediaPlayer(media);
-
-            songLabel.setText(file.getName()); //Changing the label for the current song
-            playMedia();
-        }
-    }
 
     public void deleteSongAction(ActionEvent actionEvent) {
-
-
     }
 }
 

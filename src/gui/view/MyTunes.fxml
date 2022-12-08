@@ -22,7 +22,7 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                  <MenuItem mnemonicParsing="false" onAction="#openButton" text="Open" />
+                  <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open" />
                         <MenuItem mnemonicParsing="false" text="Close" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Settings" />

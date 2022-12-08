@@ -15,26 +15,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LogicManager {
-
     private SongDAO_db songDAO_db = new SongDAO_db();
+    private PlaylistDAO playlistDAO = new PlaylistDAO();
 
     public Song createSong (String title, String artist, String source, int genreID, String time) throws SQLException {
         return songDAO_db.createSong(title, artist, source, genreID, time);
     }
 
-    public Song deleteSong(String song) throws  SQLException{
-        return songDAO_db.deleteSong(song);
-    }
-
-
-
     public List<Song> getAllSongs(){
-
         return songDAO_db.getAllSongs();
     }
 
-
-    private PlaylistDAO playlistDAO = new PlaylistDAO();
+    public Song deleteSong(String song) throws  SQLException{
+        return songDAO_db.deleteSong(song);
+    }
 
     public Playlist createPlaylist(String name) throws  SQLException{
         return playlistDAO.createPlaylist(name);

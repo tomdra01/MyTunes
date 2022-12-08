@@ -2,15 +2,10 @@ package be;
 
 public class Song {
     private int id;
-
     private String title;
-
     private String artist;
-
     private String source;
-
     private int genreID;
-
     private String time;
 
     public Song(String title, String artist, String source, int genreID, String time) {
