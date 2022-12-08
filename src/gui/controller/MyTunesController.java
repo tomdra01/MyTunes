@@ -31,6 +31,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MyTunesController implements Initializable {
+
     @FXML
     private TableColumn<Playlist,String> nameColumn;
     @FXML
@@ -39,6 +40,8 @@ public class MyTunesController implements Initializable {
     private ProgressBar songProgressBar;
     @FXML
     private Slider volumeSlider;
+    @FXML
+    private MenuItem deleteButton;
 
     @FXML
     private TableView<Playlist> playlistTable;
@@ -277,7 +280,7 @@ public class MyTunesController implements Initializable {
         FXMLLoader createPlaylistLoader = new FXMLLoader(Main.class.getResource("view/CreatePlaylistWindow.fxml"));
         Scene createPlaylistScene = new Scene(createPlaylistLoader.load());
 
-        NewWindowController newWindowController = createPlaylistLoader.getController();
+        newWindowController = createPlaylistLoader.getController();
         newWindowController.setModel(model);
 
         Stage createPlaylistStage = new Stage();
@@ -305,6 +308,8 @@ public class MyTunesController implements Initializable {
     }
 
     public void deleteSongAction(ActionEvent actionEvent) {
+        Song selectedItem = songsTable.getSelectionModel().getSelectedItem();
+        songsTable.getItems().remove(selectedItem);
     }
 }
 

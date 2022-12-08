@@ -29,7 +29,7 @@ public class NewWindowController implements Initializable {
     @FXML
     private TextField playlistNameField;
     @FXML
-    private Label titleField;
+    private TextField titleField;
     @FXML
     private Button createButton;
     @FXML
