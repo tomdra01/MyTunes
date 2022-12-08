@@ -2,13 +2,11 @@ package dal;
 
 import be.Song;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SongDAO_db {
-
     private DatabaseConnector databaseConnector;
 
     public SongDAO_db() {
@@ -55,29 +53,35 @@ public class SongDAO_db {
         return new Song(title, source, artist, genreID, time);
     }
 
-    public void delete(int id) {
-        String sql = "DELETE FROM Songs WHERE SongID= ?";
+    public Song deleteSong(String song) {
+        String sql = "DELETE FROM Songs WHERE Title= ?";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            // set the corresponding param
-            pstmt.setInt(1, id);
+
+            pstmt.setString(1, song);
             // execute the delete statement
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return null;
     }
+
+
 
     public static void main(String[] args) throws SQLException {
         SongDAO_db songDAO_db = new SongDAO_db();
+        songDAO_db.deleteSong("Feel Good");
 
         //songDAO_db.createSong("Just Dance", "Lady Gaga", "songPathXXX", 1, "1");
 
         List<Song> allSongs = songDAO_db.getAllSongs();
 
-        System.out.println(allSongs);
+        //System.out.println(allSongs);
     }
+
+
 }

@@ -1,6 +1,8 @@
 package gui.controller;
 
+import be.Playlist;
 import be.Song;
+import dal.DatabaseConnector;
 import gui.Main;
 import gui.model.MyTunesModel;
 import javafx.beans.value.ChangeListener;
@@ -12,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -19,6 +22,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -26,13 +32,15 @@ import java.util.TimerTask;
 
 public class MyTunesController implements Initializable {
     @FXML
-    private TableView<String> playlistTable;
+    private TableView<Playlist> playlistTable;
     @FXML
-    private TableColumn<Song,String> nameColumn;
+    private TableColumn<Playlist,String> nameColumn;
     @FXML
-    private TableView queueTable;
+    private Label songLabel;
     @FXML
-    private TableColumn<Song,String> queueColumn;
+    private ProgressBar songProgressBar;
+    @FXML
+    private Slider volumeSlider;
     @FXML
     private TableView<Song> songsTable;
     @FXML
@@ -43,29 +51,31 @@ public class MyTunesController implements Initializable {
     private TableColumn<Song,String> genreColumn;
     @FXML
     private TableColumn<Song,String> timeColumn;
-    @FXML
-    private Label songLabel;
-    @FXML
-    private Slider volumeSlider;
-    @FXML
-    private ProgressBar songProgressBar;
-    private Media media;
+
+    private MyTunesModel model;
+    private NewWindowController newWindowController;
     private MediaPlayer mediaPlayer;
+    private Media media;
+    private ArrayList<File> songs;
+    private int songNumber;
     private File directory;
     private File[] files;
     private String path;
-    private ArrayList<File> songs;
-    private int songNumber;
     private Timer timer;
     private TimerTask task;
     private boolean running;
-    private MyTunesModel model;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = new MyTunesModel();
+        model.fetchAllPlaylist();
+        playlistTable.setItems(model.getPlaylist());
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
         model.fetchAllSongs();
+
         songsTable.setItems(model.getSongs());
+
         titleColumn.setCellValueFactory((new PropertyValueFactory<>("title")));
         artistColumn.setCellValueFactory((new PropertyValueFactory<>("artist")));
         genreColumn.setCellValueFactory((new PropertyValueFactory<>("genreID")));
@@ -88,8 +98,28 @@ public class MyTunesController implements Initializable {
         changeVolume();
     }
 
+    /**
+     * Opens the file and immediately starts playing the music
+     */
+    public void openFile(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(null);
+        path = file.toURI().toString();
 
+        if (path != null){
+            mediaPlayer.stop(); //Stops the current playing song before opening new song
+            Media media = new Media(path);
+            mediaPlayer = new MediaPlayer(media);
 
+            songLabel.setText(file.getName()); //Changing the label for the current song
+            beginTimer();
+            playMedia();
+        }
+    }
+
+    /**
+     * Changes the volume of the song using volume slider
+     */
     public void changeVolume(){
         volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -202,17 +232,23 @@ public class MyTunesController implements Initializable {
         timer.scheduleAtFixedRate(task, 0, 1000);
     }
 
+    /**
+     * Resets the timer
+     */
     public void cancelTimer(){
         running = false;
         timer.cancel();
     }
 
+    /**
+     * Opens a new window
+     * add song...
+     */
     public void addSong(ActionEvent actionEvent) throws IOException{
         FXMLLoader addSongLoader = new FXMLLoader(Main.class.getResource("view/AddSongWindow.fxml"));
         Scene addSongScene = new Scene(addSongLoader.load());
 
-        NewWindowController newWindowController = addSongLoader.getController();
-        newWindowController.setParentController();
+        newWindowController = addSongLoader.getController();
         newWindowController.setModel(model);
 
         Stage addSongStage = new Stage();
@@ -222,12 +258,15 @@ public class MyTunesController implements Initializable {
         addSongStage.show();
     }
 
+    /**
+     * Opens a new window
+     * edit song...
+     */
     public void editSong(ActionEvent actionEvent) throws IOException{
         FXMLLoader editSongLoader = new FXMLLoader(Main.class.getResource("view/EditSongWindow.fxml"));
         Scene editSongScene = new Scene(editSongLoader.load());
 
-        NewWindowController newWindowController = editSongLoader.getController();
-        newWindowController.setParentController();
+        newWindowController = editSongLoader.getController();
 
         Stage editSongStage = new Stage();
         editSongStage.setTitle("Edit Song");
@@ -236,12 +275,21 @@ public class MyTunesController implements Initializable {
         editSongStage.show();
     }
 
+    /**
+     * Opens a new window
+     * create playlist...
+     */
     public void createPlaylist(ActionEvent actionEvent) throws IOException {
         FXMLLoader createPlaylistLoader = new FXMLLoader(Main.class.getResource("view/CreatePlaylistWindow.fxml"));
         Scene createPlaylistScene = new Scene(createPlaylistLoader.load());
 
+
         NewWindowController newWindowController = createPlaylistLoader.getController();
-        newWindowController.setParentController();
+        //newWindowController.setParentController();
+        newWindowController.setModel(model);
+
+        newWindowController = createPlaylistLoader.getController();
+
 
         Stage createPlaylistStage = new Stage();
         createPlaylistStage.setTitle("Create Playlist");
@@ -250,12 +298,15 @@ public class MyTunesController implements Initializable {
         createPlaylistStage.show();
     }
 
+    /**
+     * Opens a new window
+     * edit playlist...
+     */
     public void editPlaylist(ActionEvent actionEvent) throws IOException {
         FXMLLoader editPlaylistLoader = new FXMLLoader(Main.class.getResource("view/EditPlaylistWindow.fxml"));
         Scene editPlaylistScene = new Scene(editPlaylistLoader.load());
 
-        NewWindowController newWindowController = editPlaylistLoader.getController();
-        newWindowController.setParentController();
+        newWindowController = editPlaylistLoader.getController();
 
         Stage editPlaylistStage = new Stage();
         editPlaylistStage.setTitle("Edit Playlist");
@@ -263,7 +314,6 @@ public class MyTunesController implements Initializable {
         editPlaylistStage.setResizable(false);
         editPlaylistStage.show();
     }
-
     public void openButton(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(null);
@@ -278,5 +328,13 @@ public class MyTunesController implements Initializable {
             playMedia();
         }
     }
+
+    public void deleteSongAction(ActionEvent actionEvent) {
+
+
+    }
 }
+
+
+
 

@@ -34,7 +34,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#addSong" text="Add Song" />
                   <MenuItem mnemonicParsing="false" onAction="#editSong" text="Edit Song" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Delete Song" />
+                  <MenuItem mnemonicParsing="false" onAction="#deleteSongAction" text="Delete Song" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Playlist">
@@ -42,7 +42,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#createPlaylist" text="Create Playlist" />
                   <MenuItem mnemonicParsing="false" onAction="#editPlaylist" text="Edit Playlist" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Delete Playlist" />
                </items>
             </Menu>
                 <Menu mnemonicParsing="false" text="About">
