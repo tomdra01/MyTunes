@@ -26,8 +26,8 @@ public class LogicManager {
         return songDAO_db.getAllSongs();
     }
 
-    public Song deleteSong(String song) throws  SQLException{
-        return songDAO_db.deleteSong(song);
+    public void deleteSong(String title) {
+        songDAO_db.deleteSong(title);
     }
 
     public Playlist createPlaylist(String name) throws  SQLException{

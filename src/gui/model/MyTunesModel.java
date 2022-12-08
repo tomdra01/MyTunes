@@ -45,10 +45,8 @@ public class MyTunesModel {
         playlists.addAll(bll.getAllPlaylist());
     }
 
-    public Song deleteSong(String Song)throws SQLException{
-        Song song = bll.deleteSong(Song);
-        songsToDelete.remove(song);
-        return song;
+    public void deleteSong(String title) {
+        bll.deleteSong(title);
     }
 
 

@@ -308,6 +308,8 @@ public class MyTunesController implements Initializable {
     }
 
     public void deleteSongAction(ActionEvent actionEvent) {
+        String selectedSongTitle = songsTable.getSelectionModel().getSelectedItem().getTitle();
+        model.deleteSong(selectedSongTitle);
         Song selectedItem = songsTable.getSelectionModel().getSelectedItem();
         songsTable.getItems().remove(selectedItem);
     }
