@@ -290,6 +290,10 @@ public class MyTunesController implements Initializable {
         }
     }
 
+    public void deleteSongAction(ActionEvent actionEvent) {
+
+
+    }
 }
 
 

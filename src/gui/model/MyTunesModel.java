@@ -10,14 +10,25 @@ import javafx.scene.media.MediaPlayer;
 import java.sql.SQLException;
 
 public class MyTunesModel {
+    private ObservableList<Song> songsToDelete = FXCollections.observableArrayList();
+    public ObservableList<Song> getSongsToDelete(){
+        return songsToDelete;
+    }
+    public ObservableList<Song> getSongs() {
+        return songs;
+    }
+    public Song deleteSong(String Song)throws SQLException{
+        Song song = bll.deleteSong(Song);
+        songsToDelete.remove(song);
+        return song;
+    }
+
     private ObservableList<Song> songs = FXCollections.observableArrayList();
     private ObservableList<Playlist> playlists = FXCollections.observableArrayList();
     LogicManager bll = new LogicManager();
 
 
-    public ObservableList<Song> getSongs() {
-        return songs;
-    }
+
 
     public Song createSong(String title, String artist, String source, int genreID, String time) throws SQLException {
         Song song = bll.createSong(title, artist, source, genreID, time);

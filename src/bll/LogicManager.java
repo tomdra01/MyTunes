@@ -21,6 +21,13 @@ public class LogicManager {
     public Song createSong (String title, String artist, String source, int genreID, String time) throws SQLException {
         return songDAO_db.createSong(title, artist, source, genreID, time);
     }
+
+    public Song deleteSong(String song) throws  SQLException{
+        return songDAO_db.deleteSong(song);
+    }
+
+
+
     public List<Song> getAllSongs(){
 
         return songDAO_db.getAllSongs();

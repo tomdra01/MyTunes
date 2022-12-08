@@ -60,7 +60,7 @@ public class SongDAO_db {
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            // set the corresponding param
+
             pstmt.setString(1, song);
             // execute the delete statement
             pstmt.executeUpdate();
