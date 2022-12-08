@@ -36,6 +36,7 @@ public class MyTunesModel {
         return song;
     }
 
+
     public void fetchAllSongs() {
         songs.addAll(bll.getAllSongs());
     }
