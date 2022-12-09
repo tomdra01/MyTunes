@@ -10,6 +10,7 @@ import javax.swing.text.html.HTML;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,5 +36,17 @@ public class LogicManager {
     }
     public  List<Playlist> getAllPlaylist(){
         return  playlistDAO.getAllPlaylist();
+    }
+
+    public List<Song> searchSongs(String query) {
+        List<Song> songs = songDAO_db.getAllSongs();
+        List<Song> filtered = new ArrayList<>();
+
+        for(Song s : songs) {
+            if((""+s.getArtist()).contains(query) || s.getTitle().toLowerCase().contains(query.toLowerCase())){
+                filtered.add(s);
+            }
+        }
+        return filtered;
     }
 }

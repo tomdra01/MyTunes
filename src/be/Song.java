@@ -40,6 +40,14 @@ public class Song {
         this.time = time;
     }
 
+    public int getGenreID() {
+        return genreID;
+    }
+
+    public void setGenreID(int genreID) {
+        this.genreID = genreID;
+    }
+
     @Override
     public String toString() {
         return "Song{" +

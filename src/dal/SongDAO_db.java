@@ -26,7 +26,7 @@ public class SongDAO_db {
                     String title = resultSet.getString("Title");
                     String artist = resultSet.getString("Artist");
                     String source = resultSet.getString("Source");
-                    Integer genreID = resultSet.getInt("genereID");
+                    Integer genreID = resultSet.getInt("GenereID");
                     String time = resultSet.getString("Time");
 
                     Song song = new Song(title, artist, source, genreID, time);

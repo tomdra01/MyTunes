@@ -56,6 +56,9 @@ public class MyTunesController implements Initializable {
     @FXML
     private TableColumn<Song,String> timeColumn;
 
+    @FXML
+    private TextField txtSongSearch;
+
     private MyTunesModel model;
     private NewWindowController newWindowController;
     private MediaPlayer mediaPlayer;
@@ -68,6 +71,8 @@ public class MyTunesController implements Initializable {
     private Timer timer;
     private TimerTask task;
     private boolean running;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -84,6 +89,13 @@ public class MyTunesController implements Initializable {
         artistColumn.setCellValueFactory((new PropertyValueFactory<>("artist")));
         genreColumn.setCellValueFactory((new PropertyValueFactory<>("genreID")));
         timeColumn.setCellValueFactory((new PropertyValueFactory<>("time")));
+
+        txtSongSearch.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                model.search(newValue);
+            }
+        });
 
         songs = new ArrayList<File>();
         directory = new File("Project Resources/Music");
