@@ -322,11 +322,16 @@ public class MyTunesController implements Initializable {
     public void deleteSongAction(ActionEvent actionEvent) {
         String selectedSongTitle = songsTable.getSelectionModel().getSelectedItem().getTitle();
         model.deleteSong(selectedSongTitle);
+
         Song selectedItem = songsTable.getSelectionModel().getSelectedItem();
         songsTable.getItems().remove(selectedItem);
     }
+
+    public void deletePlaylistAction(ActionEvent actionEvent) {
+        String selectedPlaylistName = playlistTable.getSelectionModel().getSelectedItem().getName();
+        model.deletePlaylist(selectedPlaylistName);
+
+        Playlist selectedItem = playlistTable.getSelectionModel().getSelectedItem();
+        playlistTable.getItems().remove(selectedItem);
+    }
 }
-
-
-
-

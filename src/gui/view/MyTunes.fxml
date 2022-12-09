@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -43,6 +44,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#createPlaylist" text="Create Playlist" />
                   <MenuItem mnemonicParsing="false" onAction="#editPlaylist" text="Edit Playlist" />
                   <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#deletePlaylistAction" text="Delete Playlist" />
                </items>
             </Menu>
                 <Menu mnemonicParsing="false" text="About">
@@ -54,6 +56,10 @@
         </MenuBar>
         <Pane prefHeight="613.0" prefWidth="870.0">
             <children>
+                <ProgressBar fx:id="songProgressBar" focusTraversable="false" layoutX="39.0" layoutY="28.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="190.0" progress="0.0">
+               <effect>
+                  <ColorAdjust hue="-0.3" saturation="-0.4" />
+               </effect></ProgressBar>
                 <Button fx:id="previousButton" layoutX="43.0" layoutY="59.0" mnemonicParsing="false" onAction="#previousMedia" prefHeight="28.0" prefWidth="33.0" text="&lt;&lt;" />
                 <Button fx:id="playButton" layoutX="93.0" layoutY="59.0" mnemonicParsing="false" onAction="#playMedia" prefHeight="28.0" prefWidth="33.0" text="▶" />
                 <Button fx:id="pauseButton" layoutX="142.0" layoutY="59.0" mnemonicParsing="false" onAction="#pauseMedia" prefHeight="28.0" prefWidth="33.0" text="||">
@@ -62,34 +68,39 @@
                </font></Button>
                 <Button fx:id="nextButton" layoutX="190.0" layoutY="59.0" mnemonicParsing="false" onAction="#nextMedia" prefHeight="28.0" prefWidth="33.0" text="&gt;&gt;" />
                 <Slider fx:id="volumeSlider" layoutX="64.0" layoutY="100.0" majorTickUnit="20.0" value="50.0" />
-                <ProgressBar fx:id="songProgressBar" focusTraversable="false" layoutX="39.0" layoutY="28.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="190.0" progress="0.0">
-               <effect>
-                  <ColorAdjust hue="-0.3" saturation="-0.4" />
-               </effect></ProgressBar>
-            <Label layoutX="532.0" layoutY="33.0" prefHeight="17.0" prefWidth="180.0" text="Now playing..." />
-                <Label fx:id="songLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="351.0" layoutY="68.0" prefHeight="17.0" prefWidth="465.0" />
+            <Label layoutX="480.0" layoutY="33.0" prefHeight="17.0" prefWidth="180.0" text="Now playing..." />
+                <Label fx:id="songLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="299.0" layoutY="65.0" prefHeight="17.0" prefWidth="465.0" />
+            <TextField fx:id="txtSongSearch" layoutX="761.0" layoutY="45.0" prefHeight="28.0" prefWidth="200.0" />
+            <Label layoutX="833.0" layoutY="28.0" prefHeight="17.0" prefWidth="57.0" text="SEARCH">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
             <Label layoutX="41.0" layoutY="142.0" prefHeight="17.0" prefWidth="75.0" text="PLAYLISTS">
                <font>
                   <Font size="11.0" />
                </font>
             </Label>
-                <Separator layoutX="264.0" layoutY="159.0" orientation="VERTICAL" prefHeight="360.0" prefWidth="6.0" />
-            <Label layoutX="571.0" layoutY="142.0" prefHeight="17.0" prefWidth="75.0" text="SONGS">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-                <Separator layoutX="531.0" layoutY="159.0" orientation="VERTICAL" prefHeight="360.0" prefWidth="6.0" />
             <TableView fx:id="playlistTable" layoutX="34.0" layoutY="159.0" prefHeight="360.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="nameColumn" prefWidth="199.0" text="Name" />
               </columns>
             </TableView>
-            <TableView fx:id="queueTable" layoutX="300.0" layoutY="159.0" prefHeight="360.0" prefWidth="200.0">
-               <columns>
-                  <TableColumn fx:id="queueColumn" prefWidth="199.0" text="Queue" />
-               </columns>
-            </TableView>
+                <Separator layoutX="264.0" layoutY="159.0" orientation="VERTICAL" prefHeight="360.0" prefWidth="6.0" />
+            <Label layoutX="309.0" layoutY="142.0" prefHeight="17.0" prefWidth="109.0" text="SONGS ON PLAYLIST">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <ListView fx:id="songListView" layoutX="300.0" layoutY="159.0" prefHeight="360.0" prefWidth="200.0" />
+            <Button layoutX="517.0" layoutY="159.0" mnemonicParsing="false" text="←" />
+                <Separator layoutX="531.0" layoutY="197.0" orientation="VERTICAL" prefHeight="160.0" prefWidth="6.0" />
+            <Separator layoutX="531.0" layoutY="357.0" orientation="VERTICAL" prefHeight="160.0" prefWidth="6.0" />
+            <Label layoutX="571.0" layoutY="142.0" prefHeight="17.0" prefWidth="75.0" text="SONGS">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
             <TableView fx:id="songsTable" layoutX="566.0" layoutY="159.0" prefHeight="360.0" prefWidth="390.0">
                <columns>
                   <TableColumn fx:id="titleColumn" prefWidth="100.0" text="Title" />
@@ -98,12 +109,6 @@
                   <TableColumn fx:id="timeColumn" prefWidth="90.0" text="Time" />
                </columns>
             </TableView>
-            <Label layoutX="309.0" layoutY="142.0" prefHeight="17.0" prefWidth="109.0" text="SONGS ON PLAYLIST">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtSongSearch" layoutX="837.0" layoutY="15.0" />
             </children>
         </Pane>
     </children>

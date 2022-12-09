@@ -38,6 +38,10 @@ public class LogicManager {
         return  playlistDAO.getAllPlaylist();
     }
 
+    public void deletePlaylist(String name){
+        playlistDAO.deletePlaylist(name);
+    }
+
     public List<Song> searchSongs(String query) {
         List<Song> songs = songDAO_db.getAllSongs();
         List<Song> filtered = new ArrayList<>();

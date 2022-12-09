@@ -49,6 +49,10 @@ public class MyTunesModel {
         bll.deleteSong(title);
     }
 
+    public void deletePlaylist(String name){
+        bll.deletePlaylist(name);
+    }
+
     public void search(String query) {
         songs.clear();
         songs.addAll(bll.searchSongs(query));

@@ -1,5 +1,6 @@
 package dal;
 import be.Playlist;
+import be.Song;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.sql.*;
@@ -42,5 +43,21 @@ public class PlaylistDAO {
             throw new RuntimeException(e);
         }
         return allPlaylist;
+    }
+
+    public void deletePlaylist(String name) {
+        String sql = "DELETE FROM Playlist WHERE Name= ?";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+
+            pstmt.setString(1, name);
+            // execute the delete statement
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

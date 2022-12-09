@@ -73,12 +73,14 @@ public class SongDAO_db {
 
 
     public static void main(String[] args) throws SQLException {
-        SongDAO_db songDAO_db = new SongDAO_db();
-        songDAO_db.deleteSong("Feel Good");
+        //SongDAO_db songDAO_db = new SongDAO_db();
+        //.deleteSong("Feel Good");
+        //PlaylistDAO playlistDAO = new PlaylistDAO();
+        //playlistDAO.deletePlaylist("TEST");
 
         //songDAO_db.createSong("Just Dance", "Lady Gaga", "songPathXXX", 1, "1");
 
-        List<Song> allSongs = songDAO_db.getAllSongs();
+        //List<Song> allSongs = songDAO_db.getAllSongs();
 
         //System.out.println(allSongs);
     }
