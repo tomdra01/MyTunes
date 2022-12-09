@@ -4,16 +4,9 @@ import be.Playlist;
 import be.Song;
 import dal.PlaylistDAO;
 import dal.SongDAO_db;
-import javafx.stage.FileChooser;
-
-import javax.swing.text.html.HTML;
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class LogicManager {
     private SongDAO_db songDAO_db = new SongDAO_db();
@@ -27,6 +20,18 @@ public class LogicManager {
         return songDAO_db.getAllSongs();
     }
 
+    public List<Song> searchSongs(String query) {
+        List<Song> songs = songDAO_db.getAllSongs();
+        List<Song> filtered = new ArrayList<>();
+
+        for(Song s : songs) {
+            if((""+s.getArtist().toLowerCase()).contains(query.toLowerCase()) || s.getTitle().toLowerCase().contains(query.toLowerCase())){
+                filtered.add(s);
+            }
+        }
+        return filtered;
+    }
+
     public void deleteSong(String title) {
         songDAO_db.deleteSong(title);
     }
@@ -38,19 +43,7 @@ public class LogicManager {
         return  playlistDAO.getAllPlaylist();
     }
 
-    public void deletePlaylist(String name){
+    public void deletePlaylist(String name) {
         playlistDAO.deletePlaylist(name);
-    }
-
-    public List<Song> searchSongs(String query) {
-        List<Song> songs = songDAO_db.getAllSongs();
-        List<Song> filtered = new ArrayList<>();
-
-        for(Song s : songs) {
-            if((""+s.getArtist().toLowerCase()).contains(query.toLowerCase()) || s.getTitle().toLowerCase().contains(query.toLowerCase())){
-                filtered.add(s);
-            }
-        }
-        return filtered;
     }
 }

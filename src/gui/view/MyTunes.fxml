@@ -36,7 +36,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#addSong" text="Add Song" />
                   <MenuItem mnemonicParsing="false" onAction="#editSong" text="Edit Song" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteSongAction" text="Delete Song" />
+                  <MenuItem mnemonicParsing="false" onAction="#deleteSongAction" text="Delete Song" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Playlist">
@@ -93,7 +93,7 @@
                </font>
             </Label>
             <ListView fx:id="songListView" layoutX="300.0" layoutY="159.0" prefHeight="360.0" prefWidth="200.0" />
-            <Button layoutX="517.0" layoutY="159.0" mnemonicParsing="false" text="←" />
+            <Button layoutX="517.0" layoutY="159.0" mnemonicParsing="false" onAction="#moveToPlaylist" text="←" />
                 <Separator layoutX="531.0" layoutY="197.0" orientation="VERTICAL" prefHeight="160.0" prefWidth="6.0" />
             <Separator layoutX="531.0" layoutY="357.0" orientation="VERTICAL" prefHeight="160.0" prefWidth="6.0" />
             <Label layoutX="571.0" layoutY="142.0" prefHeight="17.0" prefWidth="75.0" text="SONGS">

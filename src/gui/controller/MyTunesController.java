@@ -7,6 +7,7 @@ import gui.Main;
 import gui.model.MyTunesModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +32,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MyTunesController implements Initializable {
-
+    @FXML
+    private ListView songListView;
     @FXML
     private TableColumn<Playlist,String> nameColumn;
     @FXML
@@ -40,8 +42,6 @@ public class MyTunesController implements Initializable {
     private ProgressBar songProgressBar;
     @FXML
     private Slider volumeSlider;
-    @FXML
-    private MenuItem deleteButton;
 
     @FXML
     private TableView<Playlist> playlistTable;
@@ -333,5 +333,10 @@ public class MyTunesController implements Initializable {
 
         Playlist selectedItem = playlistTable.getSelectionModel().getSelectedItem();
         playlistTable.getItems().remove(selectedItem);
+    }
+
+    public void moveToPlaylist(ActionEvent actionEvent) {
+        Song selectSong = songsTable.getSelectionModel().getSelectedItem();
+        songListView.getItems().add(selectSong.getTitle());
     }
 }

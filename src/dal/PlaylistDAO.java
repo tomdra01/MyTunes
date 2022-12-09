@@ -1,8 +1,7 @@
 package dal;
-import be.Playlist;
-import be.Song;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+import be.Playlist;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +10,13 @@ public class PlaylistDAO {
     private DatabaseConnector databaseConnector;
     public PlaylistDAO() {
         databaseConnector = new DatabaseConnector();
+    }
+
+    public static void main(String[] args) throws SQLException {
+        PlaylistDAO playlistDAO = new PlaylistDAO();
+        playlistDAO.deletePlaylist(" ");
+        playlistDAO.createPlaylist(" ");
+        List<Playlist> allPlaylist = playlistDAO.getAllPlaylist();
     }
 
     public Playlist createPlaylist(String name) throws SQLException {
@@ -51,11 +57,8 @@ public class PlaylistDAO {
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-
             pstmt.setString(1, name);
-            // execute the delete statement
             pstmt.executeUpdate();
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
