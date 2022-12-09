@@ -43,7 +43,7 @@ public class LogicManager {
         List<Song> filtered = new ArrayList<>();
 
         for(Song s : songs) {
-            if((""+s.getArtist()).contains(query) || s.getTitle().toLowerCase().contains(query.toLowerCase())){
+            if((""+s.getArtist().toLowerCase()).contains(query.toLowerCase()) || s.getTitle().toLowerCase().contains(query.toLowerCase())){
                 filtered.add(s);
             }
         }
