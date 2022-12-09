@@ -5,10 +5,10 @@ public class Song {
     private String title;
     private String artist;
     private String source;
-    private int genreID;
+    private String genreID;
     private String time;
 
-    public Song(String title, String artist, String source, int genreID, String time) {
+    public Song(String title, String artist, String source, String genreID, String time) {
         this.title = title;
         this.artist = artist;
         this.source = source;
@@ -40,11 +40,11 @@ public class Song {
         this.time = time;
     }
 
-    public int getGenreID() {
+    public String getGenreID() {
         return genreID;
     }
 
-    public void setGenreID(int genreID) {
+    public void setGenreID(String genreID) {
         this.genreID = genreID;
     }
 

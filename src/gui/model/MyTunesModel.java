@@ -21,7 +21,7 @@ public class MyTunesModel {
         return songsToDelete;
     }
 
-    public Song createSong(String title, String artist, String source, int genreID, String time) throws SQLException {
+    public Song createSong(String title, String artist, String source, String genreID, String time) throws SQLException {
         Song song = bll.createSong(title, artist, source, genreID, time);
         songs.add(song);
         return song;

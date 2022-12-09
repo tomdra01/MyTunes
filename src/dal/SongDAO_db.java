@@ -16,14 +16,14 @@ public class SongDAO_db {
     public static void main(String[] args) throws SQLException {
         SongDAO_db songDAO_db = new SongDAO_db();
         songDAO_db.deleteSong(" ");
-        songDAO_db.createSong(" ", " ", " ", 1, " ");
+        songDAO_db.createSong(" ", " ", " ", " ", " ");
         List<Song> allSongs = songDAO_db.getAllSongs();
     }
 
     public List<Song> getAllSongs(){
         ArrayList<Song> allSongs = new ArrayList<>();
         try(Connection connection = databaseConnector.getConnection()){
-            String sql = "SELECT * FROM Songs;";
+            String sql = "SELECT * FROM Songs JOIN Genere ON Genere.GenereID = Songs.GenereID";
 
             Statement statement = connection.createStatement();
 
@@ -33,7 +33,7 @@ public class SongDAO_db {
                     String title = resultSet.getString("Title");
                     String artist = resultSet.getString("Artist");
                     String source = resultSet.getString("Source");
-                    Integer genreID = resultSet.getInt("GenereID");
+                    String genreID = resultSet.getString("Genere");
                     String time = resultSet.getString("Time");
 
                     Song song = new Song(title, artist, source, genreID, time);
@@ -48,7 +48,7 @@ public class SongDAO_db {
         return allSongs;
     }
 
-    public Song createSong(String title, String artist, String source, int genreID, String time) throws SQLException {
+    public Song createSong(String title, String artist, String source, String genreID, String time) throws SQLException {
         try(Connection connection = databaseConnector.getConnection()) {
             String insert = "'" + title + "'" + "," + "'" + artist + "'" + "," + "'" + source + "'" + "," + genreID + "," + "'" + time + "'";
             String sql = "INSERT INTO Songs (Title, Source, Artist, GenereID, Time) VALUES (" + insert + ")";

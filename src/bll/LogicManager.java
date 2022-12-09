@@ -12,7 +12,7 @@ public class LogicManager {
     private SongDAO_db songDAO_db = new SongDAO_db();
     private PlaylistDAO playlistDAO = new PlaylistDAO();
 
-    public Song createSong (String title, String artist, String source, int genreID, String time) throws SQLException {
+    public Song createSong (String title, String artist, String source, String genreID, String time) throws SQLException {
         return songDAO_db.createSong(title, artist, source, genreID, time);
     }
 

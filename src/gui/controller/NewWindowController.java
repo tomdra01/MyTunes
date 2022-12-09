@@ -43,6 +43,7 @@ public class NewWindowController implements Initializable {
     @FXML
     private TextField fileField;
 
+
     @FXML
     private Button addButton;
     @FXML
@@ -87,7 +88,7 @@ public class NewWindowController implements Initializable {
      * This method adds song directly to the database and when you press "Add" button it will close the window
      */
     public void addSongAction(ActionEvent actionEvent) throws SQLException {
-        model.createSong(titleField.getText(), path, artistField.getText(), 1 , timeField.getText());
+        model.createSong(titleField.getText(), path, artistField.getText(), chooseCategory.getText() , timeField.getText());
 
         Stage stage = (Stage) addButton.getScene().getWindow();
         stage.close();
