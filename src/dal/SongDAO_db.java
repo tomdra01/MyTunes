@@ -15,9 +15,10 @@ public class SongDAO_db {
 
     public static void main(String[] args) throws SQLException {
         SongDAO_db songDAO_db = new SongDAO_db();
-        songDAO_db.deleteSong(" ");
-        songDAO_db.createSong(" ", " ", " ", " ", " ");
-        List<Song> allSongs = songDAO_db.getAllSongs();
+        //songDAO_db.deleteSong(" ");
+        //songDAO_db.createSong(" ", " ", " ", " ", " ");
+        //List<Song> allSongs = songDAO_db.getAllSongs();
+        //songDAO_db.editSong("Roots", "NewRoots", "newSource", "NewTable", "2");
     }
 
     public List<Song> getAllSongs(){
@@ -69,6 +70,29 @@ public class SongDAO_db {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void editSong(String title, String newTitle, String newSource, String newArtist, String newGenreID) {
+        PreparedStatement pstmt=null;
+
+        try(Connection connection = databaseConnector.getConnection()) {
+            String sql = "UPDATE Songs " +
+                    "SET Title=?, Source =?, Artist =?, GenereID =? " +
+                    "WHERE Title=?";
+
+            pstmt=connection.prepareStatement(sql);
+            pstmt.setString(1, newTitle);
+            pstmt.setString(2, newSource);
+            pstmt.setString(3, newArtist);
+            pstmt.setString(4, newGenreID);
+            pstmt.setString(5, title);
+            pstmt.executeUpdate();
+
+        } catch (SQLServerException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
