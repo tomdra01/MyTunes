@@ -88,7 +88,7 @@ public class NewWindowController implements Initializable {
      * This method adds song directly to the database and when you press "Add" button it will close the window
      */
     public void addSongAction(ActionEvent actionEvent) throws SQLException {
-        model.createSong(titleField.getText(), path, artistField.getText(), chooseCategory.getText() , timeField.getText());
+        model.createSong(titleField.getText(), artistField.getText(), path, chooseCategory.getText() , timeField.getText());
 
         Stage stage = (Stage) addButton.getScene().getWindow();
         stage.close();

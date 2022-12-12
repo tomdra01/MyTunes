@@ -26,8 +26,8 @@
                 <Label layoutX="33.0" layoutY="144.0" prefHeight="19.0" prefWidth="89.0" text="Category:" />
                 <SplitMenuButton layoutX="122.0" layoutY="141.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" text="Choose">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Pop" />
-                        <MenuItem mnemonicParsing="false" text="Trap" />
+                        <MenuItem mnemonicParsing="false" text="Pop" value="2"/>
+                        <MenuItem mnemonicParsing="false" text="Trap" value="3"/>
                     </items>
                 </SplitMenuButton>
             </children>

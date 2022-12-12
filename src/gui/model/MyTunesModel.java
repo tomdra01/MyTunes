@@ -5,6 +5,8 @@ import be.Song;
 import bll.LogicManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.media.MediaPlayer;
+
 import java.sql.SQLException;
 
 public class MyTunesModel {
@@ -57,10 +59,6 @@ public class MyTunesModel {
         songs.clear();
         songs.addAll(bll.searchSongs(query));
     }
-
-
-
-
 
 }
 

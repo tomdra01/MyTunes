@@ -50,13 +50,13 @@ public class SongDAO_db {
 
     public Song createSong(String title, String artist, String source, String genreID, String time) throws SQLException {
         try(Connection connection = databaseConnector.getConnection()) {
-            String insert = "'" + title + "'" + "," + "'" + artist + "'" + "," + "'" + source + "'" + "," + genreID + "," + "'" + time + "'";
-            String sql = "INSERT INTO Songs (Title, Source, Artist, GenereID, Time) VALUES (" + insert + ")";
+            String insert = "'" + title + "'" + "," + "'" + artist + "'" + "," + "'" + source + "'" + "," + 2 + "," + "'" + time + "'";
+            String sql = "INSERT INTO Songs (Title,Source, Artist, GenereID, Time) VALUES (" + insert + ")";
 
             Statement statement = connection.createStatement();
             statement.execute(sql);
         }
-        return new Song(title, source, artist, genreID, time);
+        return new Song(title, artist,source, genreID, time);
     }
 
     public void deleteSong(String song) {
