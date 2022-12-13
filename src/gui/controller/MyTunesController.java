@@ -273,6 +273,7 @@ public class MyTunesController implements Initializable {
         Scene editSongScene = new Scene(editSongLoader.load());
 
         newWindowController = editSongLoader.getController();
+        newWindowController.setModel(model);
         newWindowController.setSelectedSong(songsTable.getSelectionModel().getSelectedItem());
 
         Stage editSongStage = new Stage();
@@ -338,5 +339,9 @@ public class MyTunesController implements Initializable {
     public void moveToPlaylist(ActionEvent actionEvent) {
         Song selectSong = songsTable.getSelectionModel().getSelectedItem();
         songListView.getItems().add(selectSong.getTitle());
+    }
+
+    public void updateSongsTable() {
+        songListView.refresh();
     }
 }

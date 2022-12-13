@@ -46,4 +46,8 @@ public class LogicManager {
     public void deletePlaylist(String name) {
         playlistDAO.deletePlaylist(name);
     }
+
+    public void editSong(String title, String newTitle, String newArtist) {
+        songDAO_db.editSong(title, newTitle, newArtist);
+    }
 }

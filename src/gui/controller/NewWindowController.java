@@ -59,6 +59,8 @@ public class NewWindowController implements Initializable {
     private MenuItem popButton;
 
     private MyTunesModel model;
+
+    private MyTunesController controller;
     private Playlist selectedPlaylist;
     private Song selectedSong;
     private MediaPlayer mediaPlayer;
@@ -101,6 +103,7 @@ public class NewWindowController implements Initializable {
     }
 
     public void editSongAction(ActionEvent actionEvent) {
+        model.editSong(selectedSong.getTitle(), editTitleField.getText(), editArtistField.getText());
         Stage stage = (Stage) editSongButton.getScene().getWindow();
         stage.close();
     }

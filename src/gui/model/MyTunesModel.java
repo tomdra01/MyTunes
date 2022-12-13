@@ -60,6 +60,9 @@ public class MyTunesModel {
         songs.addAll(bll.searchSongs(query));
     }
 
+    public void editSong(String title, String newTitle, String newArtist) {
+        bll.editSong(title, newTitle, newArtist);
+    }
 }
 
 
