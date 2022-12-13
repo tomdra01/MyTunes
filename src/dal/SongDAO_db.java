@@ -18,7 +18,7 @@ public class SongDAO_db {
         //songDAO_db.deleteSong(" ");
         //songDAO_db.createSong(" ", " ", " ", " ", " ");
         //List<Song> allSongs = songDAO_db.getAllSongs();
-        //songDAO_db.editSong("Roots", "NewRoots", "newSource", "NewTable", "2");
+        //songDAO_db.editSong("Cult", "NewCult", "NewSlayer", "2");
     }
 
     public List<Song> getAllSongs(){
@@ -51,7 +51,7 @@ public class SongDAO_db {
 
     public Song createSong(String title, String artist, String source, String genreID, String time) throws SQLException {
         try(Connection connection = databaseConnector.getConnection()) {
-            String insert = "'" + title + "'" + "," + "'" + artist + "'" + "," + "'" + source + "'" + "," + 2 + "," + "'" + time + "'";
+            String insert = "'" + title + "'" + "," + "'" + source + "'" + "," + "'" + artist + "'" + "," + 2 + "," + "'" + time + "'";
             String sql = "INSERT INTO Songs (Title,Source, Artist, GenereID, Time) VALUES (" + insert + ")";
 
             Statement statement = connection.createStatement();
@@ -73,20 +73,19 @@ public class SongDAO_db {
         }
     }
 
-    public void editSong(String title, String newTitle, String newSource, String newArtist, String newGenreID) {
+    public void editSong(String title, String newTitle, String newArtist, String newGenreID) {
         PreparedStatement pstmt=null;
 
         try(Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE Songs " +
-                    "SET Title=?, Source =?, Artist =?, GenereID =? " +
+                    "SET Title=?, Artist =?, GenereID =? " +
                     "WHERE Title=?";
 
             pstmt=connection.prepareStatement(sql);
             pstmt.setString(1, newTitle);
-            pstmt.setString(2, newSource);
-            pstmt.setString(3, newArtist);
-            pstmt.setString(4, newGenreID);
-            pstmt.setString(5, title);
+            pstmt.setString(2, newArtist);
+            pstmt.setString(3, newGenreID);
+            pstmt.setString(4, title);
             pstmt.executeUpdate();
 
         } catch (SQLServerException e) {
