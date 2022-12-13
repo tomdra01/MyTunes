@@ -1,5 +1,7 @@
 package gui.controller;
 
+import be.Playlist;
+import be.Song;
 import gui.model.MyTunesModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,55 +12,59 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class NewWindowController implements Initializable {
     @FXML
-    private TextField playlistNameField;
-    @FXML
     private TextField titleField;
     @FXML
-    private Button createButton;
-    @FXML
-    private Button cancelButton;
+    private TextField editTitleField;
     @FXML
     private TextField artistField;
     @FXML
+    private TextField editArtistField;
+    @FXML
+    private TextField playlistNameField;
+    @FXML
+    private TextField editPlaylistNameField;
+    @FXML
     private SplitMenuButton chooseCategory;
     @FXML
-    private TextField timeField;
+    private SplitMenuButton editCategoryButton;
     @FXML
     private TextField fileField;
+    @FXML
+    private TextField timeField;
 
 
     @FXML
     private Button addButton;
+    @FXML
+    private Button editSongButton;
+    @FXML
+    private Button createButton;
+    @FXML
+    private Button editPlaylistButton;
+    @FXML
+    private Button cancelButton;
     @FXML
     private MenuItem trapButton;
     @FXML
     private MenuItem popButton;
 
     private MyTunesModel model;
+    private Playlist selectedPlaylist;
+    private Song selectedSong;
     private MediaPlayer mediaPlayer;
     private File file;
     private String path;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
 
     public void setModel(MyTunesModel model){
         this.model = model;
@@ -94,12 +100,22 @@ public class NewWindowController implements Initializable {
         stage.close();
     }
 
+    public void editSongAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) editSongButton.getScene().getWindow();
+        stage.close();
+    }
+
     /**
      * This method creates new playlist
      */
     public void createPlaylistAction(ActionEvent actionEvent) throws SQLException{
         model.createPlaylist(playlistNameField.getText());
         Stage stage = (Stage) createButton.getScene().getWindow();
+        stage.close();
+    }
+
+    public void editPlaylistAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) editPlaylistButton.getScene().getWindow();
         stage.close();
     }
 
@@ -118,4 +134,25 @@ public class NewWindowController implements Initializable {
     public void trapCategory(ActionEvent actionEvent) {
         chooseCategory.setText(trapButton.getText());
     }
+
+    public void setSelectedPlaylist(Playlist selectedItem) {
+        this.selectedPlaylist = selectedItem;
+        editPlaylistNameField.setText(selectedPlaylist.getName());
+    }
+
+    public void setSelectedSong(Song selectedItem) {
+        this.selectedSong = selectedItem;
+        editTitleField.setText(selectedSong.getTitle());
+        editArtistField.setText(selectedSong.getArtist());
+        editCategoryButton.setText(selectedSong.getGenreID());
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println(selectedPlaylist);
+
+    }
+
+
+
 }

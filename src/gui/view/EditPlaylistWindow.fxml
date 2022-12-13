@@ -18,13 +18,13 @@
         <AnchorPane prefHeight="320.0" prefWidth="600.0">
             <children>
                 <Label layoutX="33.0" layoutY="66.0" prefHeight="19.0" prefWidth="89.0" text="Name:" />
-                <TextField layoutX="122.0" layoutY="62.0" />
+                <TextField fx:id="editPlaylistNameField" layoutX="122.0" layoutY="62.0" />
             </children>
         </AnchorPane>
         <Separator prefHeight="3.0" prefWidth="400.0" />
         <BorderPane prefHeight="50.0" prefWidth="600.0">
             <right>
-                <Button mnemonicParsing="false" text="Save" BorderPane.alignment="CENTER" />
+                <Button fx:id="editPlaylistButton" mnemonicParsing="false" onAction="#editPlaylistAction" text="Edit" BorderPane.alignment="CENTER" />
             </right>
             <left>
                 <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelActionButton" text="Cancel" BorderPane.alignment="CENTER" />

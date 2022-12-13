@@ -2,12 +2,10 @@ package gui.controller;
 
 import be.Playlist;
 import be.Song;
-import dal.DatabaseConnector;
 import gui.Main;
 import gui.model.MyTunesModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -23,9 +20,6 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -149,6 +143,9 @@ public class MyTunesController implements Initializable {
      */
     public void playMedia() {
         beginTimer();
+        media = new Media(songsTable.getSelectionModel().getSelectedItem().getSource());
+        mediaPlayer = new MediaPlayer(media);
+        changeVolume();
         mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
         mediaPlayer.play();
     }
@@ -276,6 +273,7 @@ public class MyTunesController implements Initializable {
         Scene editSongScene = new Scene(editSongLoader.load());
 
         newWindowController = editSongLoader.getController();
+        newWindowController.setSelectedSong(songsTable.getSelectionModel().getSelectedItem());
 
         Stage editSongStage = new Stage();
         editSongStage.setTitle("Edit Song");
@@ -311,6 +309,8 @@ public class MyTunesController implements Initializable {
         Scene editPlaylistScene = new Scene(editPlaylistLoader.load());
 
         newWindowController = editPlaylistLoader.getController();
+        newWindowController.setSelectedPlaylist(playlistTable.getSelectionModel().getSelectedItem());
+        //newWindowController.setModel(model);
 
         Stage editPlaylistStage = new Stage();
         editPlaylistStage.setTitle("Edit Playlist");

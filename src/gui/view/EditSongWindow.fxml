@@ -20,14 +20,14 @@
         <AnchorPane prefHeight="320.0" prefWidth="600.0">
             <children>
                 <Label layoutX="33.0" layoutY="66.0" prefHeight="19.0" prefWidth="89.0" text="Title" />
-                <TextField layoutX="122.0" layoutY="62.0" />
+                <TextField fx:id="editTitleField" layoutX="122.0" layoutY="62.0" />
                 <Label layoutX="33.0" layoutY="106.0" prefHeight="19.0" prefWidth="89.0" text="Artist:" />
-                <TextField layoutX="122.0" layoutY="102.0" />
+                <TextField fx:id="editArtistField" layoutX="122.0" layoutY="102.0" />
                 <Label layoutX="33.0" layoutY="144.0" prefHeight="19.0" prefWidth="89.0" text="Category:" />
-                <SplitMenuButton layoutX="122.0" layoutY="141.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" text="Choose">
+                <SplitMenuButton fx:id="editCategoryButton" layoutX="122.0" layoutY="141.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" text="Choose">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Pop" id ="2"/>
-                        <MenuItem mnemonicParsing="false" text="Trap" id="3"/>
+                        <MenuItem id="2" mnemonicParsing="false" text="Pop" />
+                        <MenuItem id="3" mnemonicParsing="false" text="Trap" />
                     </items>
                 </SplitMenuButton>
             </children>
@@ -35,7 +35,7 @@
         <Separator prefHeight="3.0" prefWidth="400.0" />
         <BorderPane prefHeight="50.0" prefWidth="600.0">
             <right>
-                <Button mnemonicParsing="false" text="Save" BorderPane.alignment="CENTER" />
+                <Button fx:id="editSongButton" mnemonicParsing="false" onAction="#editSongAction" text="Edit" BorderPane.alignment="CENTER" />
             </right>
             <left>
                 <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelActionButton" text="Cancel" BorderPane.alignment="CENTER" />
