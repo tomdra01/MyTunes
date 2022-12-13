@@ -50,4 +50,8 @@ public class LogicManager {
     public void editSong(String title, String newTitle, String newArtist) {
         songDAO_db.editSong(title, newTitle, newArtist);
     }
+
+    public void editPlaylist(String name, String newName) {
+        playlistDAO.editPlaylist(name, newName);
+    }
 }

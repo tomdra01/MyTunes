@@ -311,7 +311,7 @@ public class MyTunesController implements Initializable {
 
         newWindowController = editPlaylistLoader.getController();
         newWindowController.setSelectedPlaylist(playlistTable.getSelectionModel().getSelectedItem());
-        //newWindowController.setModel(model);
+        newWindowController.setModel(model);
 
         Stage editPlaylistStage = new Stage();
         editPlaylistStage.setTitle("Edit Playlist");
@@ -339,9 +339,5 @@ public class MyTunesController implements Initializable {
     public void moveToPlaylist(ActionEvent actionEvent) {
         Song selectSong = songsTable.getSelectionModel().getSelectedItem();
         songListView.getItems().add(selectSong.getTitle());
-    }
-
-    public void updateSongsTable() {
-        songListView.refresh();
     }
 }

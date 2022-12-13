@@ -63,6 +63,10 @@ public class MyTunesModel {
     public void editSong(String title, String newTitle, String newArtist) {
         bll.editSong(title, newTitle, newArtist);
     }
+
+    public void editPlaylist(String name, String newName) {
+        bll.editPlaylist(name, newName);
+    }
 }
 
 

@@ -63,4 +63,24 @@ public class PlaylistDAO {
             System.out.println(e.getMessage());
         }
     }
+
+    public void editPlaylist(String name, String newName) {
+        PreparedStatement pstmt=null;
+
+        try(Connection connection = databaseConnector.getConnection()) {
+            String sql = "UPDATE Playlist " +
+                    "SET Name=? " +
+                    "WHERE Name=?";
+
+            pstmt=connection.prepareStatement(sql);
+            pstmt.setString(1, newName);
+            pstmt.setString(2, name);
+            pstmt.executeUpdate();
+
+        } catch (SQLServerException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

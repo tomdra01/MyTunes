@@ -118,6 +118,7 @@ public class NewWindowController implements Initializable {
     }
 
     public void editPlaylistAction(ActionEvent actionEvent) {
+        model.editPlaylist(selectedPlaylist.getName(), editPlaylistNameField.getText());
         Stage stage = (Stage) editPlaylistButton.getScene().getWindow();
         stage.close();
     }
