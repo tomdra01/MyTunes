@@ -14,6 +14,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.File;
 import java.net.URL;
@@ -96,15 +97,26 @@ public class NewWindowController implements Initializable {
      * This method adds song directly to the database and when you press "Add" button it will close the window
      */
     public void addSongAction(ActionEvent actionEvent) throws SQLException {
-        model.createSong(titleField.getText(), artistField.getText(), path, chooseCategory.getText() , timeField.getText());
-
         Stage stage = (Stage) addButton.getScene().getWindow();
+
+        if(titleField.getText().trim().isEmpty() || artistField.getText().trim().isEmpty() || path.isEmpty() || chooseCategory.getText().trim().isEmpty() || timeField.getText().isEmpty()){
+            stage.close();
+        }else {
+            model.createSong(titleField.getText(), artistField.getText(), path, chooseCategory.getText() , timeField.getText());
+        }
+
         stage.close();
     }
 
     public void editSongAction(ActionEvent actionEvent) {
-        model.editSong(selectedSong.getTitle(), editTitleField.getText(), editArtistField.getText());
         Stage stage = (Stage) editSongButton.getScene().getWindow();
+        if (editTitleField.getText().trim().isEmpty()||editArtistField.getText().trim().isEmpty()){
+            stage.close();
+        }else{
+            model.editSong(selectedSong.getTitle(), editTitleField.getText(), editArtistField.getText());
+        }
+
+
         stage.close();
     }
 
@@ -112,14 +124,25 @@ public class NewWindowController implements Initializable {
      * This method creates new playlist
      */
     public void createPlaylistAction(ActionEvent actionEvent) throws SQLException{
-        model.createPlaylist(playlistNameField.getText());
         Stage stage = (Stage) createButton.getScene().getWindow();
+        if (playlistNameField.getText().trim().isEmpty()){
+            stage.close();
+        }else {
+            model.createPlaylist(playlistNameField.getText());
+        }
+
+
         stage.close();
     }
 
     public void editPlaylistAction(ActionEvent actionEvent) {
-        model.editPlaylist(selectedPlaylist.getName(), editPlaylistNameField.getText());
         Stage stage = (Stage) editPlaylistButton.getScene().getWindow();
+        if (editPlaylistNameField.getText().trim().isEmpty()){
+            stage.close();
+        }else {
+            model.editPlaylist(selectedPlaylist.getName(), editPlaylistNameField.getText());
+        }
+
         stage.close();
     }
 
@@ -156,6 +179,8 @@ public class NewWindowController implements Initializable {
         System.out.println(selectedPlaylist);
 
     }
+
+
 
 
 
