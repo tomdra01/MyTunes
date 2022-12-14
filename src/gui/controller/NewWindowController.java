@@ -6,10 +6,7 @@ import gui.model.MyTunesModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -98,9 +95,13 @@ public class NewWindowController implements Initializable {
      */
     public void addSongAction(ActionEvent actionEvent) throws SQLException {
         Stage stage = (Stage) addButton.getScene().getWindow();
+        Alert a = new Alert(Alert.AlertType.NONE);
 
         if(titleField.getText().trim().isEmpty() || artistField.getText().trim().isEmpty() || path.isEmpty() || chooseCategory.getText().trim().isEmpty() || timeField.getText().isEmpty()){
-            stage.close();
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.setContentText("Please fill in all fields");
+            a.show();
+
         }else {
             model.createSong(titleField.getText(), artistField.getText(), path, chooseCategory.getText() , timeField.getText());
         }
@@ -110,8 +111,11 @@ public class NewWindowController implements Initializable {
 
     public void editSongAction(ActionEvent actionEvent) {
         Stage stage = (Stage) editSongButton.getScene().getWindow();
+        Alert a = new Alert(Alert.AlertType.NONE);
         if (editTitleField.getText().trim().isEmpty()||editArtistField.getText().trim().isEmpty()){
-            stage.close();
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.setContentText("Please fill in all fields");
+            a.show();
         }else{
             model.editSong(selectedSong.getTitle(), editTitleField.getText(), editArtistField.getText());
         }
@@ -125,8 +129,11 @@ public class NewWindowController implements Initializable {
      */
     public void createPlaylistAction(ActionEvent actionEvent) throws SQLException{
         Stage stage = (Stage) createButton.getScene().getWindow();
+        Alert a = new Alert(Alert.AlertType.NONE);
         if (playlistNameField.getText().trim().isEmpty()){
-            stage.close();
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.setContentText("Please fill in all fields");
+            a.show();
         }else {
             model.createPlaylist(playlistNameField.getText());
         }
@@ -137,8 +144,11 @@ public class NewWindowController implements Initializable {
 
     public void editPlaylistAction(ActionEvent actionEvent) {
         Stage stage = (Stage) editPlaylistButton.getScene().getWindow();
+        Alert a = new Alert(Alert.AlertType.NONE);
         if (editPlaylistNameField.getText().trim().isEmpty()){
-            stage.close();
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.setContentText("Please fill in all fields");
+            a.show();
         }else {
             model.editPlaylist(selectedPlaylist.getName(), editPlaylistNameField.getText());
         }
