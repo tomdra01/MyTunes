@@ -17,7 +17,8 @@ public class SongDAO_db {
         SongDAO_db songDAO_db = new SongDAO_db();
         //songDAO_db.deleteSong(" ");
         //songDAO_db.createSong(" ", " ", " ", " ", " ");
-        //List<Song> allSongs = songDAO_db.getAllSongs();
+        List<Song> allSongs = songDAO_db.getAllSongs();
+        System.out.println(allSongs);
         //songDAO_db.editSong("Cult", "NewCult", "NewSlayer", "2");
     }
 
@@ -31,13 +32,14 @@ public class SongDAO_db {
             if(statement.execute(sql)) {
                 ResultSet resultSet = statement.getResultSet();
                 while(resultSet.next()) {
+                    int id = resultSet.getInt("SongID");
                     String title = resultSet.getString("Title");
                     String artist = resultSet.getString("Artist");
                     String source = resultSet.getString("Source");
                     String genreID = resultSet.getString("Genere");
                     String time = resultSet.getString("Time");
 
-                    Song song = new Song(title, artist, source, genreID, time);
+                    Song song = new Song(id, title, artist, source, genreID, time);
                     allSongs.add(song);
                 }
             }

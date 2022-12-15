@@ -43,8 +43,9 @@ public class PlaylistDAO {
             if (statement.execute(sql)) {
                 ResultSet resultSet = statement.getResultSet();
                 while (resultSet.next()) {
+                    int id = resultSet.getInt("PlaylistID");
                     String name = resultSet.getString("Name");
-                    Playlist playlist = new Playlist(name);
+                    Playlist playlist = new Playlist(id, name);
                     allPlaylist.add(playlist);
                 }
             }

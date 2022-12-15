@@ -33,7 +33,8 @@ public class Playlist  {
     @Override
     public String toString() {
         return "Playlist{" +
-                " name ='" + name + '\'' + '}';
+                " id ='" + id + '\'' +
+                ", name ='" + name + '\'' + '}';
 
     }
 }
