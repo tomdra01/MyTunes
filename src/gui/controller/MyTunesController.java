@@ -20,10 +20,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class MyTunesController implements Initializable {
     @FXML
@@ -55,6 +52,7 @@ public class MyTunesController implements Initializable {
 
     private MyTunesModel model;
     private NewWindowController newWindowController;
+    private FXMLLoader delete;
     private MediaPlayer mediaPlayer;
     private Media media;
     private ArrayList<File> songs;
@@ -91,6 +89,7 @@ public class MyTunesController implements Initializable {
             }
         });
 
+        /*
         songs = new ArrayList<File>();
         directory = new File("Project Resources/Music");
         files = directory.listFiles();
@@ -105,6 +104,7 @@ public class MyTunesController implements Initializable {
         changeVolume();
 
         songLabel.setText(songs.get(songNumber).getName());
+         */
     }
 
     /**
@@ -142,9 +142,10 @@ public class MyTunesController implements Initializable {
      * and we also begin our timeline
      */
     public void playMedia() {
+        media = new Media(songsTable.getSelectionModel().getSelectedItem().getSource());
+        mediaPlayer = new MediaPlayer(media);
+        songLabel.setText(songsTable.getSelectionModel().getSelectedItem().getArtist() + "  -  " + songsTable.getSelectionModel().getSelectedItem().getTitle());
         beginTimer();
-        //media = new Media(songsTable.getSelectionModel().getSelectedItem().getSource());
-        //mediaPlayer = new MediaPlayer(media);
         changeVolume();
         mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
         mediaPlayer.play();
@@ -163,6 +164,14 @@ public class MyTunesController implements Initializable {
      * Go back to the previous song
      */
     public void previousMedia() {
+        mediaPlayer.stop();
+        songsTable.getSelectionModel().selectPrevious();
+        media = new Media(songsTable.getSelectionModel().getSelectedItem().getSource());
+        mediaPlayer = new MediaPlayer(media);
+        songLabel.setText(songsTable.getSelectionModel().getSelectedItem().getArtist() + "  -  " + songsTable.getSelectionModel().getSelectedItem().getTitle());
+        mediaPlayer.play();
+
+        /*
         if(songNumber > 0) {
             songNumber--;
             mediaPlayer.stop();
@@ -187,13 +196,22 @@ public class MyTunesController implements Initializable {
 
             songLabel.setText(songs.get(songNumber).getName());
             playMedia();
+
         }
+         */
     }
 
     /**
      * Skip to the next song
      */
     public void nextMedia(){
+        mediaPlayer.stop();
+        songsTable.getSelectionModel().selectNext();
+        media = new Media(songsTable.getSelectionModel().getSelectedItem().getSource());
+        mediaPlayer = new MediaPlayer(media);
+        songLabel.setText(songsTable.getSelectionModel().getSelectedItem().getArtist() + "  -  " + songsTable.getSelectionModel().getSelectedItem().getTitle());
+        mediaPlayer.play();
+        /*
         if(songNumber < songs.size() - 1){
             songNumber++;
             mediaPlayer.stop();
@@ -219,6 +237,8 @@ public class MyTunesController implements Initializable {
             songLabel.setText(songs.get(songNumber).getName());
             playMedia();
         }
+         */
+
     }
 
     public void beginTimer() {
@@ -320,20 +340,45 @@ public class MyTunesController implements Initializable {
         editPlaylistStage.show();
     }
 
-    public void deleteSongAction(ActionEvent actionEvent) {
-        int selectedSongTitle = songsTable.getSelectionModel().getSelectedItem().getId();
-        model.deleteSong(selectedSongTitle);
-
+    public void deleteSongAction(ActionEvent actionEvent) throws IOException {
+        //Getting the selection item from the table
+        int selectedSong = songsTable.getSelectionModel().getSelectedItem().getId();
         Song selectedItem = songsTable.getSelectionModel().getSelectedItem();
-        songsTable.getItems().remove(selectedItem);
+
+        //Creating alert
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Do you really want to DELETE?");
+
+        //Button statements
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){ //... user chose OK
+            model.deleteSong(selectedSong);
+            songsTable.getItems().remove(selectedItem);
+            alert.close();
+        } else {
+            alert.close(); //... user chose CANCEL or closed the dialog
+        }
     }
 
-    public void deletePlaylistAction(ActionEvent actionEvent) {
-        int selectedPlaylistName = playlistTable.getSelectionModel().getSelectedItem().getId();
-        model.deletePlaylist(selectedPlaylistName);
+    public void deletePlaylistAction(ActionEvent actionEvent) throws IOException {
+        //Creating alert
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Do you really want to DELETE?");
 
-        Playlist selectedItem = playlistTable.getSelectionModel().getSelectedItem();
-        playlistTable.getItems().remove(selectedItem);
+        //Button statements
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){ //... user chose OK
+            int selectedPlaylistID = playlistTable.getSelectionModel().getSelectedItem().getId();
+            model.deletePlaylist(selectedPlaylistID);
+
+            Playlist selectedItem = playlistTable.getSelectionModel().getSelectedItem();
+            playlistTable.getItems().remove(selectedItem);
+            alert.close();
+        } else {
+            alert.close(); //... user chose CANCEL or closed the dialog
+        }
     }
 
     public void moveToPlaylist(ActionEvent actionEvent) {

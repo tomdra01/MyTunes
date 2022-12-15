@@ -65,7 +65,6 @@ public class NewWindowController implements Initializable {
     private File file;
     private String path;
 
-
     public void setModel(MyTunesModel model){
         this.model = model;
     }
@@ -101,27 +100,24 @@ public class NewWindowController implements Initializable {
             a.setAlertType(Alert.AlertType.ERROR);
             a.setContentText("Please fill in all fields");
             a.show();
-
         }else {
             model.createSong(titleField.getText(), artistField.getText(), path, chooseCategory.getText() , timeField.getText());
+            stage.close();
         }
-
-        stage.close();
     }
 
     public void editSongAction(ActionEvent actionEvent) {
         Stage stage = (Stage) editSongButton.getScene().getWindow();
         Alert a = new Alert(Alert.AlertType.NONE);
+
         if (editTitleField.getText().trim().isEmpty()||editArtistField.getText().trim().isEmpty()){
             a.setAlertType(Alert.AlertType.ERROR);
             a.setContentText("Please fill in all fields");
             a.show();
         }else{
             model.editSong(selectedSong.getTitle(), editTitleField.getText(), editArtistField.getText());
+            stage.close();
         }
-
-
-        stage.close();
     }
 
     /**
@@ -130,30 +126,29 @@ public class NewWindowController implements Initializable {
     public void createPlaylistAction(ActionEvent actionEvent) throws SQLException{
         Stage stage = (Stage) createButton.getScene().getWindow();
         Alert a = new Alert(Alert.AlertType.NONE);
+
         if (playlistNameField.getText().trim().isEmpty()){
             a.setAlertType(Alert.AlertType.ERROR);
             a.setContentText("Please fill in all fields");
             a.show();
         }else {
             model.createPlaylist(playlistNameField.getText());
+            stage.close();
         }
-
-
-        stage.close();
     }
 
     public void editPlaylistAction(ActionEvent actionEvent) {
         Stage stage = (Stage) editPlaylistButton.getScene().getWindow();
         Alert a = new Alert(Alert.AlertType.NONE);
+
         if (editPlaylistNameField.getText().trim().isEmpty()){
             a.setAlertType(Alert.AlertType.ERROR);
             a.setContentText("Please fill in all fields");
             a.show();
         }else {
             model.editPlaylist(selectedPlaylist.getName(), editPlaylistNameField.getText());
+            stage.close();
         }
-
-        stage.close();
     }
 
     /**
@@ -186,12 +181,6 @@ public class NewWindowController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println(selectedPlaylist);
 
     }
-
-
-
-
-
 }
