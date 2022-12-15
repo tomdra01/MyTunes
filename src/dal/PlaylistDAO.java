@@ -14,8 +14,8 @@ public class PlaylistDAO {
 
     public static void main(String[] args) throws SQLException {
         PlaylistDAO playlistDAO = new PlaylistDAO();
-        playlistDAO.deletePlaylist(" ");
-        playlistDAO.createPlaylist(" ");
+        //playlistDAO.deletePlaylist(" ");
+       // playlistDAO.createPlaylist(" ");
         List<Playlist> allPlaylist = playlistDAO.getAllPlaylist();
     }
 
@@ -24,9 +24,14 @@ public class PlaylistDAO {
             String insert = "'" + name + "'";
             String sql = "INSERT INTO Playlist (Name) VALUES (" + insert + ")";
             Statement statement = connection.createStatement();
-            statement.execute(sql);
+            statement.execute(sql,Statement.RETURN_GENERATED_KEYS);
+
+            ResultSet keys = statement.getGeneratedKeys();
+            keys.next();
+            int id = keys.getInt(1);
+            return new Playlist(id, name);
         }
-        return new Playlist(name);
+
     }
 
     public List<Playlist> getAllPlaylist() {
@@ -51,13 +56,13 @@ public class PlaylistDAO {
         return allPlaylist;
     }
 
-    public void deletePlaylist(String name) {
-        String sql = "DELETE FROM Playlist WHERE Name= ?";
+    public void deletePlaylist(int id) {
+        String sql = "DELETE FROM Playlist WHERE PlaylistID= ?";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, name);
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

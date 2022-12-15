@@ -55,18 +55,23 @@ public class SongDAO_db {
             String sql = "INSERT INTO Songs (Title,Source, Artist, GenereID, Time) VALUES (" + insert + ")";
 
             Statement statement = connection.createStatement();
-            statement.execute(sql);
+            statement.execute(sql,Statement.RETURN_GENERATED_KEYS);
+
+            ResultSet keys = statement.getGeneratedKeys();
+            keys.next();
+            int id = keys.getInt(1);
+            return new Song(id, title, artist,source, genreID, time);
         }
-        return new Song(title, artist,source, genreID, time);
+
     }
 
-    public void deleteSong(String song) {
-        String sql = "DELETE FROM Songs WHERE Title= ?";
+    public void deleteSong(int id) {
+        String sql = "DELETE FROM Songs WHERE SongID= ?";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, song);
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

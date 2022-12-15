@@ -16,6 +16,11 @@ public class Song {
         this.time = time;
     }
 
+    public Song(int id, String title, String artist, String source, String genreID, String time) {
+        this(title, artist,source,genreID,time);
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }

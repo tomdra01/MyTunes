@@ -47,12 +47,12 @@ public class MyTunesModel {
         playlists.addAll(bll.getAllPlaylist());
     }
 
-    public void deleteSong(String title) {
-        bll.deleteSong(title);
+    public void deleteSong(int id) {
+        bll.deleteSong(id);
     }
 
-    public void deletePlaylist(String name){
-        bll.deletePlaylist(name);
+    public void deletePlaylist(int id){
+        bll.deletePlaylist(id);
     }
 
     public void search(String query) {

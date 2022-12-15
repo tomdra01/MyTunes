@@ -143,8 +143,8 @@ public class MyTunesController implements Initializable {
      */
     public void playMedia() {
         beginTimer();
-        media = new Media(songsTable.getSelectionModel().getSelectedItem().getSource());
-        mediaPlayer = new MediaPlayer(media);
+        //media = new Media(songsTable.getSelectionModel().getSelectedItem().getSource());
+        //mediaPlayer = new MediaPlayer(media);
         changeVolume();
         mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
         mediaPlayer.play();
@@ -321,7 +321,7 @@ public class MyTunesController implements Initializable {
     }
 
     public void deleteSongAction(ActionEvent actionEvent) {
-        String selectedSongTitle = songsTable.getSelectionModel().getSelectedItem().getTitle();
+        int selectedSongTitle = songsTable.getSelectionModel().getSelectedItem().getId();
         model.deleteSong(selectedSongTitle);
 
         Song selectedItem = songsTable.getSelectionModel().getSelectedItem();
@@ -329,7 +329,7 @@ public class MyTunesController implements Initializable {
     }
 
     public void deletePlaylistAction(ActionEvent actionEvent) {
-        String selectedPlaylistName = playlistTable.getSelectionModel().getSelectedItem().getName();
+        int selectedPlaylistName = playlistTable.getSelectionModel().getSelectedItem().getId();
         model.deletePlaylist(selectedPlaylistName);
 
         Playlist selectedItem = playlistTable.getSelectionModel().getSelectedItem();

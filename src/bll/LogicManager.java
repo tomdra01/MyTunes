@@ -32,8 +32,8 @@ public class LogicManager {
         return filtered;
     }
 
-    public void deleteSong(String title) {
-        songDAO_db.deleteSong(title);
+    public void deleteSong(int id) {
+        songDAO_db.deleteSong(id);
     }
 
     public Playlist createPlaylist(String name) throws  SQLException{
@@ -43,8 +43,8 @@ public class LogicManager {
         return  playlistDAO.getAllPlaylist();
     }
 
-    public void deletePlaylist(String name) {
-        playlistDAO.deletePlaylist(name);
+    public void deletePlaylist(int id) {
+        playlistDAO.deletePlaylist(id);
     }
 
     public void editSong(String title, String newTitle, String newArtist) {

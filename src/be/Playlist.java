@@ -13,6 +13,15 @@ public class Playlist  {
         this.name = name;
     }
 
+    public Playlist(int id, String name) {
+        this(name);
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
