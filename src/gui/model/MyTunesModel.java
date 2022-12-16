@@ -67,6 +67,10 @@ public class MyTunesModel {
     public void editPlaylist(int id, String newName) {
         bll.editPlaylist(id, newName);
     }
+
+    public void addSongsInPlaylist(int playlistID, int songID) throws SQLException {
+        bll.addSongsInPlaylist(playlistID, songID);
+    }
 }
 
 

@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
 
 public class MyTunesController implements Initializable {
@@ -380,8 +381,12 @@ public class MyTunesController implements Initializable {
         }
     }
 
-    public void moveToPlaylist(ActionEvent actionEvent) {
+    public void moveToPlaylist(ActionEvent actionEvent) throws SQLException {
         Song selectSong = songsTable.getSelectionModel().getSelectedItem();
+        int selectedSongID = songsTable.getSelectionModel().getSelectedItem().getId();
+        Playlist selectedPlaylist = playlistTable.getSelectionModel().getSelectedItem();
+        int selectedPlaylistID = playlistTable.getSelectionModel().getSelectedItem().getId();
+        model.addSongsInPlaylist(selectedPlaylistID, selectedSongID);
         songListView.getItems().add(selectSong.getTitle());
     }
 }

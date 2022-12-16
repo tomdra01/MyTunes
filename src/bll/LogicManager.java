@@ -4,6 +4,8 @@ import be.Playlist;
 import be.Song;
 import dal.PlaylistDAO;
 import dal.SongDAO_db;
+import dal.SongsInPlaylistDAO_db;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,8 @@ import java.util.List;
 public class LogicManager {
     private SongDAO_db songDAO_db = new SongDAO_db();
     private PlaylistDAO playlistDAO = new PlaylistDAO();
+
+    private SongsInPlaylistDAO_db songsInPlaylistDAO_db = new SongsInPlaylistDAO_db();
 
     public Song createSong (String title, String artist, String source, String genreID, String time) throws SQLException {
         return songDAO_db.createSong(title, artist, source, genreID, time);
@@ -53,5 +57,9 @@ public class LogicManager {
 
     public void editPlaylist(int id, String newName) {
         playlistDAO.editPlaylist(id, newName);
+    }
+
+    public void addSongsInPlaylist(int playlistID, int songID) throws SQLException {
+        songsInPlaylistDAO_db.addSongsInPlaylist(playlistID, songID);
     }
 }
