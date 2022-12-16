@@ -47,11 +47,11 @@ public class LogicManager {
         playlistDAO.deletePlaylist(id);
     }
 
-    public void editSong(String title, String newTitle, String newArtist) {
-        songDAO_db.editSong(title, newTitle, newArtist);
+    public void editSong(int id, String newTitle, String newArtist) {
+        songDAO_db.editSong(id, newTitle, newArtist);
     }
 
-    public void editPlaylist(String name, String newName) {
-        playlistDAO.editPlaylist(name, newName);
+    public void editPlaylist(int id, String newName) {
+        playlistDAO.editPlaylist(id, newName);
     }
 }

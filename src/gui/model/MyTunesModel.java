@@ -60,12 +60,12 @@ public class MyTunesModel {
         songs.addAll(bll.searchSongs(query));
     }
 
-    public void editSong(String title, String newTitle, String newArtist) {
-        bll.editSong(title, newTitle, newArtist);
+    public void editSong(int id, String newTitle, String newArtist) {
+        bll.editSong(id, newTitle, newArtist);
     }
 
-    public void editPlaylist(String name, String newName) {
-        bll.editPlaylist(name, newName);
+    public void editPlaylist(int id, String newName) {
+        bll.editPlaylist(id, newName);
     }
 }
 

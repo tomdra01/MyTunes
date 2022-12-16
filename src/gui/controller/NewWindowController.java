@@ -115,7 +115,7 @@ public class NewWindowController implements Initializable {
             a.setContentText("Please fill in all fields");
             a.show();
         }else{
-            model.editSong(selectedSong.getTitle(), editTitleField.getText(), editArtistField.getText());
+            model.editSong(selectedSong.getId(), editTitleField.getText(), editArtistField.getText());
             stage.close();
         }
     }
@@ -146,7 +146,7 @@ public class NewWindowController implements Initializable {
             a.setContentText("Please fill in all fields");
             a.show();
         }else {
-            model.editPlaylist(selectedPlaylist.getName(), editPlaylistNameField.getText());
+            model.editPlaylist(selectedPlaylist.getId(), editPlaylistNameField.getText());
             stage.close();
         }
     }

@@ -80,18 +80,18 @@ public class SongDAO_db {
         }
     }
 
-    public void editSong(String title, String newTitle, String newArtist) {
+    public void editSong(int id, String newTitle, String newArtist) {
         PreparedStatement pstmt=null;
 
         try(Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE Songs " +
                     "SET Title=?, Artist =? " +
-                    "WHERE Title=?";
+                    "WHERE SongID=?";
 
             pstmt=connection.prepareStatement(sql);
             pstmt.setString(1, newTitle);
             pstmt.setString(2, newArtist);
-            pstmt.setString(3, title);
+            pstmt.setInt(3, id);
             pstmt.executeUpdate();
 
         } catch (SQLServerException e) {
