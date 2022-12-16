@@ -64,19 +64,17 @@ public class MyTunesController implements Initializable {
     private TimerTask task;
     private boolean running;
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //PLAYLISTS
         model = new MyTunesModel();
         model.fetchAllPlaylist();
         playlistTable.setItems(model.getPlaylist());
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
+        //SONGS
         model.fetchAllSongs();
-
         songsTable.setItems(model.getSongs());
-
         titleColumn.setCellValueFactory((new PropertyValueFactory<>("title")));
         artistColumn.setCellValueFactory((new PropertyValueFactory<>("artist")));
         genreColumn.setCellValueFactory((new PropertyValueFactory<>("genreID")));
@@ -112,6 +110,7 @@ public class MyTunesController implements Initializable {
      */
     public void openFile(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Audio types", "*.mp3", "*.wav"));
         File file = fileChooser.showOpenDialog(null);
         path = file.toURI().toString();
 

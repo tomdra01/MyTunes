@@ -74,6 +74,7 @@ public class NewWindowController implements Initializable {
      */
     public void chooseFile() {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Audio types", "*.mp3", "*.wav"));
         file = fileChooser.showOpenDialog(null);
         path = file.toURI().toString();
 
