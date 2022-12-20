@@ -18,7 +18,6 @@ public class SongsInPlaylist {
     public int getSongID() {
         return songID;
     }
-
     public int getPlaylistID() {
         return playlistID;
     }
@@ -40,8 +39,12 @@ public class SongsInPlaylist {
     public void setSource(){
         this.source = source;
     }
+
+    /**
+     * toString method
+     */
+    @Override
     public String toString() {
         return title+ "  -  " + artist;
 }
 }
-

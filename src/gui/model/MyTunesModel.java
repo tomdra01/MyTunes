@@ -14,12 +14,11 @@ public class MyTunesModel {
     private ObservableList<Song> songs = FXCollections.observableArrayList();
     private ObservableList<Playlist> playlists = FXCollections.observableArrayList();
 
+    /**
+     * SONG
+     */
     public ObservableList<Song> getSongs() {
         return songs;
-    }
-
-    public ObservableList<Song> getSongsToDelete(){
-        return songsToDelete;
     }
 
     public Song createSong(String title, String artist, String source, String genreID, String time) throws SQLException {
@@ -28,10 +27,21 @@ public class MyTunesModel {
         return song;
     }
 
+    public void editSong(Song selectedSong) {
+        bll.editSong(selectedSong);
+    }
+
+    public void deleteSong(int id) {
+        bll.deleteSong(id);
+    }
+
     public void fetchAllSongs() {
         songs.addAll(bll.getAllSongs());
     }
 
+    /**
+     * PLAYLIST
+     */
     public ObservableList<Playlist> getPlaylist() {
         return playlists;
     }
@@ -41,24 +51,27 @@ public class MyTunesModel {
         playlists.add(playlist);
         return playlist;
     }
-
+    public void editPlaylist(Playlist selectedPlaylist) {
+        bll.editPlaylist(selectedPlaylist);
+    }
+    public void deletePlaylist(int id) {
+        bll.deletePlaylist(id);
+    }
     public void fetchAllPlaylist() {
         playlists.addAll(bll.getAllPlaylist());
     }
 
-    public void deleteSong(int id) {
-        bll.deleteSong(id);
-    }
-
-    public void deletePlaylist(int id){
-        bll.deletePlaylist(id);
-    }
-
+    /**
+     * SEARCH
+     */
     public void search(String query) {
         songs.clear();
         songs.addAll(bll.searchSongs(query));
     }
 
+    public ObservableList<Song> getSongsToDelete() {
+        return songsToDelete;
+    }
     public void addSongsInPlaylist(int playlistID, int songID) throws SQLException {
         bll.addSongsInPlaylist(playlistID, songID);
     }
@@ -68,16 +81,4 @@ public class MyTunesModel {
         listObservable.addAll(bll.getSongInPlayList(id));
         return listObservable;
     }
-
-    public void editSong(Song selectedSong) {
-        bll.editSong(selectedSong);
-
-    }
-
-    public void editPlaylist(Playlist selectedPlaylist) {
-        bll.editPlaylist(selectedPlaylist);
-    }
 }
-
-
-

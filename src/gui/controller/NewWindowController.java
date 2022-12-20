@@ -56,7 +56,6 @@ public class NewWindowController implements Initializable {
     private MenuItem popButton;
 
     private MyTunesModel model;
-    private MyTunesController controller;
     private Playlist selectedPlaylist;
     private Song selectedSong;
     private MediaPlayer mediaPlayer;
@@ -92,7 +91,7 @@ public class NewWindowController implements Initializable {
      * This method adds song directly to the database and when you press "add" button it will close the window
      * it will also pop up Error alert when you haven't filled in all text fields
      */
-    public void addSongAction(ActionEvent actionEvent) throws SQLException {
+    public void addSongAction() throws SQLException {
         Stage stage = (Stage) addButton.getScene().getWindow();
         Alert a = new Alert(Alert.AlertType.NONE); // New alert
 
@@ -121,7 +120,7 @@ public class NewWindowController implements Initializable {
      * This method edits song from it's tableView and also from the database
      * ... Error alert pops up when the edit fieldText is empty
      */
-    public void editSongAction(ActionEvent actionEvent) {
+    public void editSongAction() {
         Stage stage = (Stage) editSongButton.getScene().getWindow();
         Alert a = new Alert(Alert.AlertType.NONE);
 
@@ -140,7 +139,7 @@ public class NewWindowController implements Initializable {
     /**
      * Create Playlist action
      */
-    public void createPlaylistAction(ActionEvent actionEvent) throws SQLException{
+    public void createPlaylistAction() throws SQLException{
         Stage stage = (Stage) createButton.getScene().getWindow();
         Alert a = new Alert(Alert.AlertType.NONE); //New alert
 
@@ -166,7 +165,7 @@ public class NewWindowController implements Initializable {
     /**
      * Edit Playlist action
      */
-    public void editPlaylistAction(ActionEvent actionEvent) {
+    public void editPlaylistAction() {
         Stage stage = (Stage) editPlaylistButton.getScene().getWindow();
         Alert a = new Alert(Alert.AlertType.NONE); //New alert
 
@@ -177,7 +176,6 @@ public class NewWindowController implements Initializable {
         }else {
             selectedPlaylist.setName(editPlaylistNameField.getText());
             model.editPlaylist(selectedPlaylist);
-            //model.editPlaylist(selectedPlaylist.getId(), editPlaylistNameField.getText());
             stage.close();
         }
     }
@@ -185,7 +183,7 @@ public class NewWindowController implements Initializable {
     /**
      * This method close the window everytime you press the "cancel" button
      */
-    public void cancelActionButton(ActionEvent actionEvent) {
+    public void cancelActionButton() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
@@ -193,19 +191,18 @@ public class NewWindowController implements Initializable {
     /**
      * Getting selected category
      */
-    public void popCategory(ActionEvent actionEvent) {
+    public void popCategory() {
         chooseCategory.setText(popButton.getText());
     }
 
     /**
      * Getting selected category
      */
-    public void trapCategory(ActionEvent actionEvent) {
+    public void trapCategory() {
         chooseCategory.setText(trapButton.getText());
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 }

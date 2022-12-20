@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -26,9 +25,6 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class MyTunesController implements Initializable {
-    private Button playButton;
-    @FXML
-    private Button moveToPlaylistButton;
     @FXML
     private ListView<SongsInPlaylist> songListView;
     @FXML
@@ -54,69 +50,23 @@ public class MyTunesController implements Initializable {
     private TableColumn<Song,String> timeColumn;
 
     @FXML
+    private Button moveToPlaylistButton;
+    @FXML
     private TextField txtSongSearch;
 
     private MyTunesModel model;
     private NewWindowController newWindowController;
-    private FXMLLoader delete;
-    private Playlist playlist;
     private MediaPlayer mediaPlayer;
     private Media media;
-    private ArrayList<File> songs;
-    private int songNumber;
-    private File directory;
-    private File[] files;
     private String path;
     private Timer timer;
     private TimerTask task;
     private boolean running;
-    private boolean playing;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //PLAYLISTS
-        model = new MyTunesModel();
-        model.fetchAllPlaylist();
-        playlistTable.setItems(model.getPlaylist());
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-        //SONGS
-        model.fetchAllSongs();
-        songsTable.setItems(model.getSongs());
-        titleColumn.setCellValueFactory((new PropertyValueFactory<>("title")));
-        artistColumn.setCellValueFactory((new PropertyValueFactory<>("artist")));
-        genreColumn.setCellValueFactory((new PropertyValueFactory<>("genreID")));
-        timeColumn.setCellValueFactory((new PropertyValueFactory<>("time")));
-
-        txtSongSearch.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                model.search(newValue);
-            }
-        });
-
-        /*
-        songs = new ArrayList<File>();
-        directory = new File("Project Resources/Music");
-        files = directory.listFiles();
-
-        if(files != null){
-            for(File file:files){
-                songs.add(file);
-            }
-        }
-        media = new Media(songs.get(songNumber).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        changeVolume();
-
-        songLabel.setText(songs.get(songNumber).getName());
-         */
-    }
 
     /**
      * Opens the file and immediately starts playing the music
      */
-    public void openFile(ActionEvent actionEvent) {
+    public void openFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Audio types", "*.mp3", "*.wav"));
         File file = fileChooser.showOpenDialog(null);
@@ -149,13 +99,16 @@ public class MyTunesController implements Initializable {
      * and we also begin our timeline
      */
     public void playMedia() {
+
         if(songListView.getSelectionModel().getSelectedItem()==null) {
             media = new Media(songsTable.getSelectionModel().getSelectedItem().getSource());
             songLabel.setText(songsTable.getSelectionModel().getSelectedItem().getArtist() + "  -  " + songsTable.getSelectionModel().getSelectedItem().getTitle());
         } else {
+            songsTable.getSelectionModel().clearSelection();
             media = new Media(songListView.getSelectionModel().getSelectedItem().getSource());
             songLabel.setText(songListView.getSelectionModel().getSelectedItem().getArtist() + "  -  " + songListView.getSelectionModel().getSelectedItem().getTitle());
         }
+
         mediaPlayer =new MediaPlayer(media);
         beginTimer();
         changeVolume();
@@ -196,35 +149,6 @@ public class MyTunesController implements Initializable {
 
             mediaPlayer.play();
         }
-
-        /*
-        if(songNumber > 0) {
-            songNumber--;
-            mediaPlayer.stop();
-
-            if(running){
-                cancelTimer();
-            }
-            media = new Media(songs.get(songNumber).toURI().toString());
-            mediaPlayer = new MediaPlayer(media);
-
-            songLabel.setText(songs.get(songNumber).getName());
-            playMedia();
-        } else {
-            songNumber = songs.size() - 1;
-            mediaPlayer.stop();
-
-            if(running){
-                cancelTimer();
-            }
-            media = new Media(songs.get(songNumber).toURI().toString());
-            mediaPlayer = new MediaPlayer(media);
-
-            songLabel.setText(songs.get(songNumber).getName());
-            playMedia();
-
-        }
-         */
     }
 
     /**
@@ -252,36 +176,11 @@ public class MyTunesController implements Initializable {
 
             mediaPlayer.play();
         }
-        /*
-        if(songNumber < songs.size() - 1){
-            songNumber++;
-            mediaPlayer.stop();
-
-            if(running){
-                cancelTimer();
-            }
-            media = new Media(songs.get(songNumber).toURI().toString());
-            mediaPlayer = new MediaPlayer(media);
-
-            songLabel.setText(songs.get(songNumber).getName());
-            playMedia();
-        } else{
-            songNumber = 0;
-            mediaPlayer.stop();
-
-            if(running){
-                cancelTimer();
-            }
-            media = new Media(songs.get(songNumber).toURI().toString());
-            mediaPlayer = new MediaPlayer(media);
-
-            songLabel.setText(songs.get(songNumber).getName());
-            playMedia();
-        }
-         */
-
     }
 
+    /**
+     * Begins the timeline
+     */
     public void beginTimer() {
         timer = new Timer();
         task = new TimerTask() {
@@ -308,10 +207,10 @@ public class MyTunesController implements Initializable {
     }
 
     /**
-     * Opens a new window
-     * add song...
+     * NEW WINDOW
+     * for adding song...
      */
-    public void addSong(ActionEvent actionEvent) throws IOException{
+    public void addSong() throws IOException{
         FXMLLoader addSongLoader = new FXMLLoader(Main.class.getResource("view/AddSongWindow.fxml"));
         Scene addSongScene = new Scene(addSongLoader.load()); //New scene
 
@@ -326,8 +225,8 @@ public class MyTunesController implements Initializable {
     }
 
     /**
-     * Opens a new window
-     * edit song...
+     * NEW WINDOW
+     * for editing song...
      */
     public void editSong(ActionEvent actionEvent) throws IOException{
         FXMLLoader editSongLoader = new FXMLLoader(Main.class.getResource("view/EditSongWindow.fxml"));
@@ -345,8 +244,8 @@ public class MyTunesController implements Initializable {
     }
 
     /**
-     * Opens a new window
-     * create playlist...
+     * NEW WINDOW
+     * for creating playlist...
      */
     public void createPlaylist(ActionEvent actionEvent) throws IOException {
         FXMLLoader createPlaylistLoader = new FXMLLoader(Main.class.getResource("view/CreatePlaylistWindow.fxml"));
@@ -363,8 +262,8 @@ public class MyTunesController implements Initializable {
     }
 
     /**
-     * Opens a new window
-     * edit playlist...
+     * NEW WINDOW
+     * for editing playlist...
      */
     public void editPlaylist(ActionEvent actionEvent) throws IOException {
         FXMLLoader editPlaylistLoader = new FXMLLoader(Main.class.getResource("view/EditPlaylistWindow.fxml"));
@@ -385,7 +284,7 @@ public class MyTunesController implements Initializable {
      * This method deletes selected song from tableView and also from the database
      * you also get a confirmation window to confirm delete
      */
-    public void deleteSongAction(ActionEvent actionEvent) throws IOException {
+    public void deleteSongAction() {
         //Getting the selection item from the table
         int selectedSong = songsTable.getSelectionModel().getSelectedItem().getId();
         Song selectedItem = songsTable.getSelectionModel().getSelectedItem();
@@ -410,7 +309,7 @@ public class MyTunesController implements Initializable {
      * This method deletes selected playlist from tableView and also from the database
      * you also get a confirmation window to confirm delete
      */
-    public void deletePlaylistAction(ActionEvent actionEvent) throws IOException {
+    public void deletePlaylistAction() {
         //Getting the selection item from the table
         int selectedPlaylistID = playlistTable.getSelectionModel().getSelectedItem().getId();
         Playlist selectedItem = playlistTable.getSelectionModel().getSelectedItem();
@@ -432,9 +331,9 @@ public class MyTunesController implements Initializable {
     }
 
     /**
-     * Moving song from song tableview to the middle column.
+     * Moving song from song tableview to the listView (Songs in playlist)
      */
-    public void selectedPlaylistAction(MouseEvent mouseEvent) {
+    public void selectedPlaylistAction() {
         if(playlistTable.getSelectionModel().getSelectedItem()==null) {
             return;
         }
@@ -452,5 +351,32 @@ public class MyTunesController implements Initializable {
                  throw new RuntimeException(e);
              }
          });
+    }
+
+    /**
+     * Initialize method
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //PLAYLISTS
+        model = new MyTunesModel();
+        model.fetchAllPlaylist();
+        playlistTable.setItems(model.getPlaylist());
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        //SONGS
+        model.fetchAllSongs();
+        songsTable.setItems(model.getSongs());
+        titleColumn.setCellValueFactory((new PropertyValueFactory<>("title")));
+        artistColumn.setCellValueFactory((new PropertyValueFactory<>("artist")));
+        genreColumn.setCellValueFactory((new PropertyValueFactory<>("genreID")));
+        timeColumn.setCellValueFactory((new PropertyValueFactory<>("time")));
+
+        txtSongSearch.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                model.search(newValue);
+            }
+        });
     }
 }
