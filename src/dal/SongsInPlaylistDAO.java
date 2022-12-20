@@ -17,6 +17,9 @@ public class SongsInPlaylistDAO {
         databaseConnector = new DatabaseConnector();
     }
 
+    /**
+     * Main method for testing purposes.
+     */
     public static void main(String[] args) throws SQLException {
         SongsInPlaylistDAO songsInPlaylistDAO_ = new SongsInPlaylistDAO();
         //songsInPlaylistDAO_.addSongsInPlaylist(1024,1145 );
@@ -24,6 +27,10 @@ public class SongsInPlaylistDAO {
         //System.out.println(allSongsInPlaylist);
     }
 
+    /**
+     * Getting all songs in the given playlist.
+     * Using JOIN to combine information from song table.
+     */
     public List<SongsInPlaylist> getAllSongsInPlaylist(int playlistID){
         ArrayList<SongsInPlaylist> allSongsInPlaylist = new ArrayList<>();
         try(Connection connection = databaseConnector.getConnection()){
@@ -52,6 +59,9 @@ public class SongsInPlaylistDAO {
         return allSongsInPlaylist;
     }
 
+    /**
+     * Adding a song to a playlist.
+     */
     public void addSongsInPlaylist(int playlistID, int songID) throws SQLException {
         try(Connection connection = databaseConnector.getConnection()) {
             String insert = "'" + playlistID + "'" + "," + "'" + songID + "'";
