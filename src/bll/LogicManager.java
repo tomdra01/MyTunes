@@ -2,30 +2,31 @@ package bll;
 
 import be.Playlist;
 import be.Song;
+import be.SongsInPlaylist;
 import dal.PlaylistDAO;
-import dal.SongDAO_db;
-import dal.SongsInPlaylistDAO_db;
+import dal.SongDAO;
+import dal.SongsInPlaylistDAO;
+import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LogicManager {
-    private SongDAO_db songDAO_db = new SongDAO_db();
+    private SongDAO songDAO = new SongDAO();
     private PlaylistDAO playlistDAO = new PlaylistDAO();
-
-    private SongsInPlaylistDAO_db songsInPlaylistDAO_db = new SongsInPlaylistDAO_db();
+    private SongsInPlaylistDAO songsInPlaylistDAO = new SongsInPlaylistDAO();
 
     public Song createSong (String title, String artist, String source, String genreID, String time) throws SQLException {
-        return songDAO_db.createSong(title, artist, source, genreID, time);
+        return songDAO.createSong(title, artist, source, genreID, time);
     }
 
     public List<Song> getAllSongs(){
-        return songDAO_db.getAllSongs();
+        return songDAO.getAllSongs();
     }
 
     public List<Song> searchSongs(String query) {
-        List<Song> songs = songDAO_db.getAllSongs();
+        List<Song> songs = songDAO.getAllSongs();
         List<Song> filtered = new ArrayList<>();
 
         for(Song s : songs) {
@@ -37,7 +38,7 @@ public class LogicManager {
     }
 
     public void deleteSong(int id) {
-        songDAO_db.deleteSong(id);
+        songDAO.deleteSong(id);
     }
 
     public Playlist createPlaylist(String name) throws  SQLException{
@@ -52,7 +53,7 @@ public class LogicManager {
     }
 
     public void editSong(int id, String newTitle, String newArtist) {
-        songDAO_db.editSong(id, newTitle, newArtist);
+        songDAO.editSong(id, newTitle, newArtist);
     }
 
     public void editPlaylist(int id, String newName) {
@@ -60,6 +61,10 @@ public class LogicManager {
     }
 
     public void addSongsInPlaylist(int playlistID, int songID) throws SQLException {
-        songsInPlaylistDAO_db.addSongsInPlaylist(playlistID, songID);
+        songsInPlaylistDAO.addSongsInPlaylist(playlistID, songID);
+    }
+
+    public List<SongsInPlaylist> getSongInPlayList(int id) {
+        return songsInPlaylistDAO.getAllSongsInPlaylist(id);
     }
 }

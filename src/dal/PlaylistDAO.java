@@ -2,6 +2,8 @@ package dal;
 
 import be.Playlist;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import dal.database.DatabaseConnector;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

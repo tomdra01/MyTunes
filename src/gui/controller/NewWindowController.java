@@ -40,7 +40,6 @@ public class NewWindowController implements Initializable {
     @FXML
     private TextField timeField;
 
-
     @FXML
     private Button addButton;
     @FXML
@@ -57,7 +56,6 @@ public class NewWindowController implements Initializable {
     private MenuItem popButton;
 
     private MyTunesModel model;
-
     private MyTunesController controller;
     private Playlist selectedPlaylist;
     private Song selectedSong;
@@ -91,11 +89,12 @@ public class NewWindowController implements Initializable {
     }
 
     /**
-     * This method adds song directly to the database and when you press "Add" button it will close the window
+     * This method adds song directly to the database and when you press "add" button it will close the window
+     * it will also pop up Error alert when you haven't filled in all text fields
      */
     public void addSongAction(ActionEvent actionEvent) throws SQLException {
         Stage stage = (Stage) addButton.getScene().getWindow();
-        Alert a = new Alert(Alert.AlertType.NONE);
+        Alert a = new Alert(Alert.AlertType.NONE); // New alert
 
         if(titleField.getText().trim().isEmpty() || artistField.getText().trim().isEmpty() || path.isEmpty() || chooseCategory.getText().trim().isEmpty() || timeField.getText().isEmpty()){
             a.setAlertType(Alert.AlertType.ERROR);
@@ -107,6 +106,21 @@ public class NewWindowController implements Initializable {
         }
     }
 
+    /**
+     * Calling a selected item from the MyTunesController's songsTable
+     * ... puts selected item in the edit fieldText
+     */
+    public void setSelectedSong(Song selectedItem) {
+        this.selectedSong = selectedItem;
+        editTitleField.setText(selectedSong.getTitle());
+        editArtistField.setText(selectedSong.getArtist());
+        editCategoryButton.setText(selectedSong.getGenreID());
+    }
+
+    /**
+     * This method edits song from it's tableView and also from the database
+     * ... Error alert pops up when the edit fieldText is empty
+     */
     public void editSongAction(ActionEvent actionEvent) {
         Stage stage = (Stage) editSongButton.getScene().getWindow();
         Alert a = new Alert(Alert.AlertType.NONE);
@@ -122,11 +136,11 @@ public class NewWindowController implements Initializable {
     }
 
     /**
-     * This method creates new playlist
+     * Create Playlist action
      */
     public void createPlaylistAction(ActionEvent actionEvent) throws SQLException{
         Stage stage = (Stage) createButton.getScene().getWindow();
-        Alert a = new Alert(Alert.AlertType.NONE);
+        Alert a = new Alert(Alert.AlertType.NONE); //New alert
 
         if (playlistNameField.getText().trim().isEmpty()){
             a.setAlertType(Alert.AlertType.ERROR);
@@ -138,9 +152,21 @@ public class NewWindowController implements Initializable {
         }
     }
 
+    /**
+     * Calling a selected item from the MyTunesController's playlistTable
+     * ... puts selected item in the edit fieldText
+     */
+    public void setSelectedPlaylist(Playlist selectedItem) {
+        this.selectedPlaylist = selectedItem;
+        editPlaylistNameField.setText(selectedPlaylist.getName());
+    }
+
+    /**
+     * Edit Playlist action
+     */
     public void editPlaylistAction(ActionEvent actionEvent) {
         Stage stage = (Stage) editPlaylistButton.getScene().getWindow();
-        Alert a = new Alert(Alert.AlertType.NONE);
+        Alert a = new Alert(Alert.AlertType.NONE); //New alert
 
         if (editPlaylistNameField.getText().trim().isEmpty()){
             a.setAlertType(Alert.AlertType.ERROR);
@@ -153,31 +179,25 @@ public class NewWindowController implements Initializable {
     }
 
     /**
-     * This method close the window everytime you press the "Cancel" button
+     * This method close the window everytime you press the "cancel" button
      */
     public void cancelActionButton(ActionEvent actionEvent) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Getting selected category
+     */
     public void popCategory(ActionEvent actionEvent) {
         chooseCategory.setText(popButton.getText());
     }
 
+    /**
+     * Getting selected category
+     */
     public void trapCategory(ActionEvent actionEvent) {
         chooseCategory.setText(trapButton.getText());
-    }
-
-    public void setSelectedPlaylist(Playlist selectedItem) {
-        this.selectedPlaylist = selectedItem;
-        editPlaylistNameField.setText(selectedPlaylist.getName());
-    }
-
-    public void setSelectedSong(Song selectedItem) {
-        this.selectedSong = selectedItem;
-        editTitleField.setText(selectedSong.getTitle());
-        editArtistField.setText(selectedSong.getArtist());
-        editCategoryButton.setText(selectedSong.getGenreID());
     }
 
     @Override

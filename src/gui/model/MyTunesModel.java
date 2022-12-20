@@ -2,11 +2,10 @@ package gui.model;
 
 import be.Playlist;
 import be.Song;
+import be.SongsInPlaylist;
 import bll.LogicManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.media.MediaPlayer;
-
 import java.sql.SQLException;
 
 public class MyTunesModel {
@@ -70,6 +69,12 @@ public class MyTunesModel {
 
     public void addSongsInPlaylist(int playlistID, int songID) throws SQLException {
         bll.addSongsInPlaylist(playlistID, songID);
+    }
+
+    public ObservableList<SongsInPlaylist> getSongInPlayList(int id) {
+        ObservableList<SongsInPlaylist> listObservable = FXCollections.observableArrayList();
+        listObservable.addAll(bll.getSongInPlayList(id));
+        return listObservable;
     }
 }
 

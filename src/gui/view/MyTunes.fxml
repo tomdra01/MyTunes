@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MyTunesController">
+<VBox prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="gui.controller.MyTunesController">
     <children>
         <MenuBar>
             <menus>
@@ -68,8 +68,8 @@
                </font></Button>
                 <Button fx:id="nextButton" layoutX="190.0" layoutY="59.0" mnemonicParsing="false" onAction="#nextMedia" prefHeight="28.0" prefWidth="33.0" text="&gt;&gt;" />
                 <Slider fx:id="volumeSlider" layoutX="64.0" layoutY="100.0" majorTickUnit="20.0" value="50.0" />
-            <Label layoutX="480.0" layoutY="33.0" prefHeight="17.0" prefWidth="180.0" text="Now playing..." />
-                <Label fx:id="songLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="299.0" layoutY="65.0" prefHeight="17.0" prefWidth="465.0" />
+            <Label layoutX="458.0" layoutY="28.0" prefHeight="17.0" prefWidth="85.0" text="Now playing..." />
+                <Label fx:id="songLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="423.0" layoutY="65.0" prefHeight="17.0" prefWidth="156.0" />
             <TextField fx:id="txtSongSearch" layoutX="761.0" layoutY="45.0" prefHeight="28.0" prefWidth="200.0" />
             <Label layoutX="833.0" layoutY="28.0" prefHeight="17.0" prefWidth="57.0" text="SEARCH">
                <font>
@@ -81,7 +81,7 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <TableView fx:id="playlistTable" layoutX="34.0" layoutY="159.0" prefHeight="360.0" prefWidth="200.0">
+            <TableView fx:id="playlistTable" layoutX="34.0" layoutY="159.0" onMouseClicked="#selectedPlaylistAction" prefHeight="360.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="nameColumn" prefWidth="199.0" text="Name" />
               </columns>
@@ -93,7 +93,7 @@
                </font>
             </Label>
             <ListView fx:id="songListView" layoutX="300.0" layoutY="159.0" prefHeight="360.0" prefWidth="200.0" />
-            <Button layoutX="517.0" layoutY="159.0" mnemonicParsing="false" onAction="#moveToPlaylist" text="←" />
+            <Button fx:id="moveToPlaylistButton" layoutX="517.0" layoutY="159.0" mnemonicParsing="false" text="←" />
                 <Separator layoutX="531.0" layoutY="197.0" orientation="VERTICAL" prefHeight="160.0" prefWidth="6.0" />
             <Separator layoutX="531.0" layoutY="357.0" orientation="VERTICAL" prefHeight="160.0" prefWidth="6.0" />
             <Label layoutX="571.0" layoutY="142.0" prefHeight="17.0" prefWidth="75.0" text="SONGS">

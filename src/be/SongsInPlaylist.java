@@ -41,14 +41,7 @@ public class SongsInPlaylist {
         this.source = source;
     }
     public String toString() {
-        return "Playlist{" +
-                " playlistID ='" + playlistID + '\'' +
-        " songID ='" + songID + '\'' +
-        " title ='" + title+ '\'' +
-        " artist ='" + artist + '\'' +
-        " source ='" + source + '\'' +
-    '}';
-
+        return title+ "  -  " + artist;
 }
 }
 

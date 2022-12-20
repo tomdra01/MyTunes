@@ -2,24 +2,26 @@ package dal;
 
 import be.Song;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import dal.database.DatabaseConnector;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SongDAO_db {
+public class SongDAO {
     private DatabaseConnector databaseConnector;
 
-    public SongDAO_db() {
+    public SongDAO() {
         databaseConnector = new DatabaseConnector();
     }
 
     public static void main(String[] args) throws SQLException {
-        SongDAO_db songDAO_db = new SongDAO_db();
-        //songDAO_db.deleteSong(" ");
-        //songDAO_db.createSong(" ", " ", " ", " ", " ");
-        List<Song> allSongs = songDAO_db.getAllSongs();
+        SongDAO songDAO_ = new SongDAO();
+        //songDAO_.deleteSong(" ");
+        //songDAO_.createSong(" ", " ", " ", " ", " ");
+        List<Song> allSongs = songDAO_.getAllSongs();
         System.out.println(allSongs);
-        //songDAO_db.editSong("Cult", "NewCult", "NewSlayer", "2");
+        //songDAO_.editSong("Cult", "NewCult", "NewSlayer", "2");
     }
 
     public List<Song> getAllSongs(){

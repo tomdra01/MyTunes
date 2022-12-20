@@ -1,9 +1,8 @@
 package dal;
 
-import be.Song;
 import be.SongsInPlaylist;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-
+import dal.database.DatabaseConnector;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,17 +10,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SongsInPlaylistDAO_db {
+public class SongsInPlaylistDAO {
     private DatabaseConnector databaseConnector;
 
-    public SongsInPlaylistDAO_db() {
+    public SongsInPlaylistDAO() {
         databaseConnector = new DatabaseConnector();
     }
 
     public static void main(String[] args) throws SQLException {
-        SongsInPlaylistDAO_db songsInPlaylistDAO_db = new SongsInPlaylistDAO_db();
-        //songsInPlaylistDAO_db.addSongsInPlaylist(1024,1145 );
-        //List<SongsInPlaylist> allSongsInPlaylist =  songsInPlaylistDAO_db.getAllSongsInPlaylist(1024);
+        SongsInPlaylistDAO songsInPlaylistDAO_ = new SongsInPlaylistDAO();
+        //songsInPlaylistDAO_.addSongsInPlaylist(1024,1145 );
+        //List<SongsInPlaylist> allSongsInPlaylist =  songsInPlaylistDAO_.getAllSongsInPlaylist(1024);
         //System.out.println(allSongsInPlaylist);
     }
 
