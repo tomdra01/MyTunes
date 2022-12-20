@@ -72,7 +72,7 @@ public class PlaylistDAO {
         }
     }
 
-    public void editPlaylist(int id, String newName) {
+    public void editPlaylist(Playlist selectedPlaylist) {
         PreparedStatement pstmt=null;
 
         try(Connection connection = databaseConnector.getConnection()) {
@@ -81,8 +81,8 @@ public class PlaylistDAO {
                     "WHERE PlaylistID=?";
 
             pstmt=connection.prepareStatement(sql);
-            pstmt.setString(1, newName);
-            pstmt.setInt(2, id);
+            pstmt.setString(1, selectedPlaylist.getName());
+            pstmt.setInt(2, selectedPlaylist.getId());
             pstmt.executeUpdate();
 
         } catch (SQLServerException e) {

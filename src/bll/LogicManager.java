@@ -52,13 +52,6 @@ public class LogicManager {
         playlistDAO.deletePlaylist(id);
     }
 
-    public void editSong(int id, String newTitle, String newArtist) {
-        songDAO.editSong(id, newTitle, newArtist);
-    }
-
-    public void editPlaylist(int id, String newName) {
-        playlistDAO.editPlaylist(id, newName);
-    }
 
     public void addSongsInPlaylist(int playlistID, int songID) throws SQLException {
         songsInPlaylistDAO.addSongsInPlaylist(playlistID, songID);
@@ -66,5 +59,13 @@ public class LogicManager {
 
     public List<SongsInPlaylist> getSongInPlayList(int id) {
         return songsInPlaylistDAO.getAllSongsInPlaylist(id);
+    }
+
+    public void editSong(Song selectedSong) {
+        songDAO.editSong(selectedSong);
+    }
+
+    public void editPlaylist(Playlist selectedPlaylist) {
+        playlistDAO.editPlaylist(selectedPlaylist);
     }
 }

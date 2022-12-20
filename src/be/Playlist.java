@@ -1,36 +1,37 @@
 package be;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Playlist  {
     private int id;
-    private String name;
+    private SimpleStringProperty name = new SimpleStringProperty();
 
     /**
      * Constructor for Playlist
      */
     public Playlist(int id, String name) {
-        this.name = name;
+        this.name.set(name);
         this.id = id;
     }
 
-    /**
-     * Getter for Id
-     */
     public int getId() {
         return id;
     }
 
-    /**
-     * Getter for Name
-     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
+        return name.get();
+    }
+
+    public SimpleStringProperty nameProperty() {
         return name;
     }
 
-    /**
-     * Setter for Name
-     */
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
     /**

@@ -130,7 +130,9 @@ public class NewWindowController implements Initializable {
             a.setContentText("Please fill in all fields");
             a.show();
         }else{
-            model.editSong(selectedSong.getId(), editTitleField.getText(), editArtistField.getText());
+            selectedSong.setArtist(editArtistField.getText());
+            selectedSong.setTitle(editTitleField.getText());
+            model.editSong(selectedSong);
             stage.close();
         }
     }
@@ -173,7 +175,9 @@ public class NewWindowController implements Initializable {
             a.setContentText("Please fill in all fields");
             a.show();
         }else {
-            model.editPlaylist(selectedPlaylist.getId(), editPlaylistNameField.getText());
+            selectedPlaylist.setName(editPlaylistNameField.getText());
+            model.editPlaylist(selectedPlaylist);
+            //model.editPlaylist(selectedPlaylist.getId(), editPlaylistNameField.getText());
             stage.close();
         }
     }

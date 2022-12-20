@@ -59,14 +59,6 @@ public class MyTunesModel {
         songs.addAll(bll.searchSongs(query));
     }
 
-    public void editSong(int id, String newTitle, String newArtist) {
-        bll.editSong(id, newTitle, newArtist);
-    }
-
-    public void editPlaylist(int id, String newName) {
-        bll.editPlaylist(id, newName);
-    }
-
     public void addSongsInPlaylist(int playlistID, int songID) throws SQLException {
         bll.addSongsInPlaylist(playlistID, songID);
     }
@@ -75,6 +67,15 @@ public class MyTunesModel {
         ObservableList<SongsInPlaylist> listObservable = FXCollections.observableArrayList();
         listObservable.addAll(bll.getSongInPlayList(id));
         return listObservable;
+    }
+
+    public void editSong(Song selectedSong) {
+        bll.editSong(selectedSong);
+
+    }
+
+    public void editPlaylist(Playlist selectedPlaylist) {
+        bll.editPlaylist(selectedPlaylist);
     }
 }
 
